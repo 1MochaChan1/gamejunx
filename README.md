@@ -1,4 +1,5 @@
 # gamejunx
+Place for gamers to find Free Games and On-Sale Games, along with some insights(I haven't figured this part out, don't ask me.) on the games they own.
 
 ## Project setup
 ```
