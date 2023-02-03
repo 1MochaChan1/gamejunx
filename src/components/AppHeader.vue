@@ -1,27 +1,61 @@
 <template>
-    <div class="app-header">
-        <div class="app-header-child"><img src="../assets/svg/logo.svg" alt=""/>
-        </div>
-        <div class="app-header-child"><h2>GameJunx</h2></div>
+  <header class="app-header">
+    <div class="logo">
+      <img src="../assets/svg/logo.svg" alt="" />
+      <h2>Gamejunx</h2>
     </div>
+    <div>
+      <ul class="actions">
+       
+        <li>
+          <img src="../assets/svg/app_bar_search.svg" alt="" />
+        </li>
+        <li>
+          <img src="../assets/svg/notification.svg" alt="" />
+        </li>
+        <li>
+          <img src="../assets/svg/gamepad.svg" alt="" />
+        </li>
+      </ul>
+    </div>
+  </header>
 </template>
 
 <script>
 export default {
-    name:'AppHeader'
-}
+  name: "AppHeader",
+};
 </script>
 
 <style>
-.app-header{
-    padding: 0px ;
-    text-align: left;
-    align-content: center;
-    align-items: center;
-    justify-content: top;
-    justify-items: top;
+
+.logo{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background-color: aqua;
 }
-.app-header-child{
-    display: inline-block;
+
+.logo img{
+  margin-bottom: 8px;
 }
+
+.app-header {
+  display: flex;
+  background-color: red;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 8px;
+}
+
+.actions {
+  list-style: none;
+  background-color: aqua;
+}
+
+.actions li {
+  display: inline-block;
+  margin-right: 24px; 
+}
+
 </style>
