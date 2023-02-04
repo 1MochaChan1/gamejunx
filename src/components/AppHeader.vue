@@ -1,7 +1,7 @@
 <template>
   <header class="app-header">
     <div class="logo">
-      <img src="../assets/svg/logo.svg" alt="" />
+      <img src="../assets/svg/app_bar_logo.svg" alt="" />
       <h2>Gamejunx</h2>
     </div>
     <div>
@@ -11,10 +11,10 @@
           <img src="../assets/svg/app_bar_search.svg" alt="" />
         </li>
         <li>
-          <img src="../assets/svg/notification.svg" alt="" />
+          <img src="../assets/svg/app_bar_notification.svg" alt="" />
         </li>
         <li>
-          <img src="../assets/svg/gamepad.svg" alt="" />
+          <img src="../assets/svg/app_bar_gamepad.svg" alt="" />
         </li>
       </ul>
     </div>
@@ -28,6 +28,8 @@ export default {
 </script>
 
 <style>
+
+
 
 .logo{
   display: flex;
