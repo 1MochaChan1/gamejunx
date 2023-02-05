@@ -29,7 +29,7 @@ h1 {
 
 h2 {
     font-family: var(--font-family);
-    /* color:var(--neutral-text-icon-color); */
+    
     font-weight: var(--font-weight-medium);
     font-size: 28px;
 }

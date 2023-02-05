@@ -1,5 +1,6 @@
 <template>
   <AppHeader />
+  
   <div class="app">
     <AppSidebar />
     <router-view />
@@ -22,7 +23,8 @@ export default {
 <style>
 .app {
   display: flex;
-  gap: 8px;
-  
+  /* position: fixed; */
+  gap: 24px;
+  padding: 0px 16px;
 }
 </style>
