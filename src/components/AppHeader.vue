@@ -2,10 +2,10 @@
   <header class="app-header">
     <div class="logo">
       <img src="../assets/svg/app_bar_logo.svg" alt="" />
-      <h2>Gamejunx</h2>
+      <h4>Gamejunx</h4>
     </div>
     <div>
-      <ul class="actions">
+      <!-- <ul class="actions">
        
         <li>
           <img src="../assets/svg/app_bar_search.svg" alt="" />
@@ -16,7 +16,7 @@
         <li>
           <img src="../assets/svg/app_bar_gamepad.svg" alt="" />
         </li>
-      </ul>
+      </ul> -->
     </div>
   </header>
 </template>
@@ -29,35 +29,34 @@ export default {
 
 <style>
 
-
-
 .logo{
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-content: center;
-  background-color: aqua;
+  gap: 4px;
+  color: var(--primary-color);
 }
 
 .logo img{
-  margin-bottom: 8px;
+  margin-bottom: 0px;
 }
 
 .app-header {
   display: flex;
-  background-color: red;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 8px;
+  padding: 0px 16px;
+  
 }
 
-.actions {
+/* .actions {
   list-style: none;
-  background-color: aqua;
 }
 
 .actions li {
   display: inline-block;
   margin-right: 24px; 
-}
+  cursor: pointer;
+} */
 
 </style>

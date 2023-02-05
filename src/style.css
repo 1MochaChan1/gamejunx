@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #FB2576;
+    --secondary-color: #00E0FF;
+    --neutral-background-color: #161616;
+    --neutral-tile-color: #101010;
+    --neutral-text-icon-color: #FFFFFF;
+    --neutral-unfocused-color: #4F4F4F;
+    --neutral-indicator-color: #2F2F2F;
+    --neutral-dark-color: #202020;
+
+
+    --font-family: 'Montserrat', sans-serif;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semi-bold: 600;
+    --font-weight-bold: 700;
+
+}
+
+h1 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-bold);
+    font-size: 32px;
+}
+
+h2 {
+    font-family: var(--font-family);
+    /* color:var(--neutral-text-icon-color); */
+    font-weight: var(--font-weight-medium);
+    font-size: 28px;
+}
+
+h3 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-semi-bold);
+    font-size: 24px;
+}
+
+h4 {
+    font-family: var(--font-family);
+    /*  */
+    font-weight: var(--font-weight-semi-bold);
+    font-size: 22px;
+}
+
+h5 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-medium);
+    font-size: 18px;
+}
+
+h6 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-semi-bold);
+    font-size: 16px;
+}
+
+.subtitle1 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-medium);
+    font-size: 14px;
+}
+
+.subtitle2 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-regular);
+    font-size: 14px;
+}
+
+.body1 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-medium);
+    font-size: 12px;
+}
+
+.body2 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-regular);
+    font-size: 10px;
+}
+
+.button1 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-semi-bold);
+    font-size: 14px;
+}
+
+.button2 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-medium);
+    font-size: 12px;
+}
+
+.link1 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-medium);
+    font-size: 14px;
+}
+
+.link2 {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-medium);
+    font-size: 12px;
+}
+
+.caption {
+    font-family: var(--font-family);
+
+    font-weight: var(--font-weight-regular);
+    font-size: 8px;
+}
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: var(--neutral-background-color);
+    color: var(--neutral-text-icon-color);
+}

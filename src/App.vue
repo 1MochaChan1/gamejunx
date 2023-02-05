@@ -1,32 +1,28 @@
 <template>
-  <AppHeader/>
-  <AppToggleSwitch />
-  <!-- <img alt="Vue logo" src="./assets/images/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  
+  <AppHeader />
+  <div class="app">
+    <AppSidebar />
+    <router-view />
+  </div>
 </template>
 
 <script>
-import AppToggleSwitch from './components/AppToggleSwitch.vue'
-import AppHeader from './components/AppHeader.vue'
+import AppHeader from "./components/AppHeader.vue";
+import AppSidebar from "./components/AppSidebar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     AppHeader,
-    AppToggleSwitch,
-  }
-}
+    AppSidebar,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center;
-  color: #2c3e50;
-  margin-top: 0px !important;
-  padding: 8px; */
-} 
+.app {
+  display: flex;
+  gap: 8px;
+  
+}
 </style>
