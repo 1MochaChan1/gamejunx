@@ -3,7 +3,7 @@
   
   <div class="app">
     <AppSidebar />
-    <router-view />
+    <router-view class="router-style"/>
   </div>
 </template>
 
@@ -26,5 +26,9 @@ export default {
   /* position: fixed; */
   gap: 24px;
   padding: 0px 16px;
+}
+
+.router-style{
+  margin: 0px;
 }
 </style>
