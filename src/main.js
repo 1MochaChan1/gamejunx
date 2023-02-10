@@ -9,11 +9,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import router from './router/index.js'
-
 import App from './App.vue'
-
 library.add(fas, far, fab);
-
 
 createApp(App)
 .component('fa-icon', FontAwesomeIcon)

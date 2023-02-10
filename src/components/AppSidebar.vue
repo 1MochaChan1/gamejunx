@@ -2,7 +2,7 @@
   <div>
     <aside>
       <div>
-        <router-link class="button body1" to="/">
+        <router-link class="button body1" to="/home">
           <span><fa-icon icon="home" /></span>
           <div>Home</div>
         </router-link>

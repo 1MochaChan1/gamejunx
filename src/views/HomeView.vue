@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    
     <h3>HomeView</h3>
     <div class="textfield-parent">
       <AppTextFieldPassword hint="Enter Password"/>
@@ -7,6 +8,7 @@
       <AppTextField hint="Edit Field"/>
     </div>
   </div>
+ 
 </template>
 
 <script>
