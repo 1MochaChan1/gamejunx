@@ -136,3 +136,34 @@ body {
     background-color: var(--neutral-background-color);
     color: var(--neutral-text-icon-color);
 }
+
+.container {
+    display: inline-block;
+}
+
+.custom-textfield,
+textarea {
+  /* display: flex; */
+
+  /* border */
+  border: none;
+  border-radius: 8px;
+
+  /* dimensionos */
+  height: 28px;
+  width: 100%;
+
+  /* spacing and alignment */
+  padding-left: 8px;
+  padding-right: 8px;
+  /* align-self: stretch; */
+
+  /* color */
+  color: var(--neutral-text-icon-color);
+  background-color: var(--neutral-indicator-color);
+
+  /* font */
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  font-size: 14px;
+}

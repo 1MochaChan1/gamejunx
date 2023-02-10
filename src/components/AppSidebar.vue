@@ -58,7 +58,7 @@ export default {
 
 <style  scoped>
 :root {
-  ---sidebar-width: 250px;
+  ---sidebar-width: 240px;
 }
 
 aside {

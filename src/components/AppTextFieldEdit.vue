@@ -7,19 +7,25 @@
       v-model="value"
     />
     <div class="textfield-icon" @click="edit()">
+      <fa-icon icon="pen" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "AppTextField",
+  name: "AppTextFieldEdit",
   data() {
     return {
       value: "",
     };
   },
-  props: ["hint"],
+  props: ["hint",],
+  methods: {
+    edit() {
+        this.$emit('edit');
+    },
+  },
 };
 </script>
 
