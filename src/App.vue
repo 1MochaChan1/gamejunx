@@ -1,21 +1,31 @@
 <template>
-  <AppHeader />
+  <AuthWrapper/>
   
-  <div class="app">
-    <AppSidebar />
-    <router-view class="router-style"/>
-  </div>
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader.vue";
-import AppSidebar from "./components/AppSidebar.vue";
+// import AppHeader from "./components/AppHeader.vue";
+// import AppSidebar from "./components/AppSidebar.vue";
+import AuthWrapper from "./components/AuthWrapper.vue";
 
 export default {
   name: "App",
+  data:() => (
+    {
+      isAuthScreen: false,
+    }),
   components: {
-    AppHeader,
-    AppSidebar,
+    // AppHeader,
+    // AppSidebar,
+    AuthWrapper,
+  },
+  method:{
+    toggle(value){
+      this.isAuthScreen=value;
+    }
+  },
+  mounted: function () {
+    
   },
 };
 </script>
@@ -28,7 +38,4 @@ export default {
   padding: 0px 16px;
 }
 
-.router-style{
-  margin: 0px;
-}
 </style>
