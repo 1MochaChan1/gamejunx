@@ -1,19 +1,12 @@
 <template>
-  <div v-if="!isAuthScreen" @isNotAuthScreen="toggle(false)">
-    <AppHeader />
-    <div class="app">
-      <AppSidebar />
-      <router-view class="router-style" />
-    </div>
-  </div>
-  <div v-else-if="isAuthScreen" @isAuthScreen="toggle(true)">
-    <router-view class="router-style" />
-  </div>
+  <AuthWrapper/>
+  
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader.vue";
-import AppSidebar from "./components/AppSidebar.vue";
+// import AppHeader from "./components/AppHeader.vue";
+// import AppSidebar from "./components/AppSidebar.vue";
+import AuthWrapper from "./components/AuthWrapper.vue";
 
 export default {
   name: "App",
@@ -22,8 +15,9 @@ export default {
       isAuthScreen: false,
     }),
   components: {
-    AppHeader,
-    AppSidebar,
+    // AppHeader,
+    // AppSidebar,
+    AuthWrapper,
   },
   method:{
     toggle(value){
@@ -44,7 +38,4 @@ export default {
   padding: 0px 16px;
 }
 
-.router-style {
-  margin: 0px;
-}
 </style>

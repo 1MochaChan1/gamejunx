@@ -62,20 +62,20 @@ h6 {
     font-size: 16px;
 }
 
-.subtitle1 {
+p.subtitle1 {
     font-family: var(--font-family);
     font-weight: var(--font-weight-medium);
     font-size: 14px;
 }
 
-.subtitle2 {
+p.subtitle2 {
     font-family: var(--font-family);
 
     font-weight: var(--font-weight-regular);
     font-size: 14px;
 }
 
-.body1 {
+p.body1 {
     font-family: var(--font-family);
     font-weight: var(--font-weight-medium);
     font-size: 12px;
@@ -87,42 +87,42 @@ p {
     font-size: 12px;
 }
 
-.body2 {
+p.body2 {
     font-family: var(--font-family);
 
     font-weight: var(--font-weight-regular);
     font-size: 10px;
 }
 
-.button1 {
+p.button1 {
     font-family: var(--font-family);
 
     font-weight: var(--font-weight-semi-bold);
     font-size: 14px;
 }
 
-.button2 {
+p.button2 {
     font-family: var(--font-family);
 
     font-weight: var(--font-weight-medium);
     font-size: 12px;
 }
 
-.link1 {
+p.link1 {
     font-family: var(--font-family);
 
     font-weight: var(--font-weight-medium);
     font-size: 14px;
 }
 
-.link2 {
+p.link2 {
     font-family: var(--font-family);
 
     font-weight: var(--font-weight-medium);
     font-size: 12px;
 }
 
-.caption {
+p.caption {
     font-family: var(--font-family);
 
     font-weight: var(--font-weight-regular);
@@ -140,6 +140,11 @@ body {
 .container {
     display: inline-block;
 }
+
+
+.router-style {
+    margin: 0px;
+  }
 
 .custom-textfield,
 textarea {

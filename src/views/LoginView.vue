@@ -1,5 +1,7 @@
 /<template>
-  <div>
+  <div class="container">
+    
+    <h1>Login View</h1>
     
   </div>
 </template>
@@ -10,5 +12,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.container{
+  display: flex;
+  flex-direction: row;
+}
 </style>

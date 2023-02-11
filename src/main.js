@@ -12,7 +12,9 @@ import router from './router/index.js'
 import App from './App.vue'
 library.add(fas, far, fab);
 
-createApp(App)
-.component('fa-icon', FontAwesomeIcon)
-.use(router)
-.mount('#app')
+const app= createApp(App)
+
+app.use(router)
+
+app.component('fa-icon', FontAwesomeIcon)
+app.mount('#app')
