@@ -4,22 +4,22 @@
       <div>
         <router-link class="button body1" to="/home">
           <span><fa-icon icon="home" /></span>
-          <div>Home</div>
+          <div><p>Home</p></div>
         </router-link>
 
         <router-link class="button body1" to="/wishlist">
           <span><fa-icon icon="heart" /></span>
-          <div>Wishlist</div>
+          <div><p>Wishlist</p></div>
         </router-link>
 
         <router-link class="button body1" to="/games">
           <span><fa-icon icon="tag" /></span>
-          <div>Games</div>
+          <div><p>Games</p></div>
         </router-link>
 
         <router-link class="button body1" to="/libraries">
           <span><fa-icon icon="gamepad" /></span>
-          <div>Libraries</div>
+          <div><p>Libraries</p></div>
         </router-link>
       </div>
 
@@ -27,23 +27,22 @@
         <div class="divider"></div>
         <router-link class="button body1" to="/profile">
           <span><fa-icon icon="user" /></span>
-          <div>Profile</div>
+          <div><p>Profile</p></div>
         </router-link>
 
         <router-link class="button body1" to="/settings">
           <span><fa-icon icon="gear" /></span>
-          <div>Settings</div>
+          <div><p>Settings</p></div>
         </router-link>
 
         <div class="button body1" to="">
           <span><fa-icon icon="sign-out" /></span>
-          <div>Sign Out</div>
+          <div><p>Sign Out</p></div>
         </div>
       </div>
     </aside>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -56,7 +55,7 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 :root {
   ---sidebar-width: 240px;
 }
@@ -87,7 +86,7 @@ aside .divider {
   color: var(--neutral-unfocused-color);
 }
 
-.button:hover{
+.button:hover {
   padding: 8px;
   transition: 0.2s;
 }
@@ -96,6 +95,6 @@ aside .divider {
   font-family: var(--font-family);
   font-weight: var(--font-weight-medium);
   font-size: 14px;
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
 }
 </style>

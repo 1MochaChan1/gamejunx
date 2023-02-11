@@ -5,7 +5,8 @@
     <div class="textfield-parent">
       <AppTextFieldPassword hint="Enter Password"/>
       <AppTextFieldEdit @edit="edit" hint="Edit Field"/>
-      <AppTextField hint="Edit Field"/>
+      <AppTextFieldEdit @edit="edit" hint="Edit Field With Icon" :showIcon="true"/>
+      <AppTextField hint="Normal Field"/>
     </div>
   </div>
  

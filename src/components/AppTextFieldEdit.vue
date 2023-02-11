@@ -6,7 +6,7 @@
       :placeholder="hint"
       v-model="value"
     />
-    <div class="textfield-icon" @click="edit()">
+    <div v-show="showIcon" class="textfield-icon" @click="edit()">
       <fa-icon icon="pen" />
     </div>
   </div>
@@ -20,10 +20,21 @@ export default {
       value: "",
     };
   },
-  props: ["hint",],
+  props: {
+    hint: {
+      type: String,
+    },
+    showIcon: {
+      type: Boolean,
+      default: false,
+    },
+    label:{
+      type:String
+    }
+  },
   methods: {
     edit() {
-        this.$emit('edit');
+      this.$emit("edit");
     },
   },
 };
