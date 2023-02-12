@@ -1,6 +1,7 @@
 .DS_Store
-node_modules
-amazon_creds
+frontend/node_modules
+frontend/amazon_creds
+backend/gamejunx_env
 /dist
 
 
