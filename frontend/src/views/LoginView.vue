@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import AppLogo from "../components/AppLogo.vue";
 import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
 import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
@@ -54,7 +55,18 @@ export default {
     forgotPassword() {
       console.log("Forgot password link pressed");
     },
+    getResponse() {
+      axios.get();
+      const path = "http://jsonplaceholder.typicode.com/posts";
+      axios.get(path).then((res) => {
+        console.log(res);
+      }).catch((err)=>
+      {
+        console.error(err)
+      });
+    },
   },
+  
   components: {
     AppLogo,
     AppTextFieldEdit,
@@ -103,7 +115,7 @@ export default {
   margin-left: 25vh;
 }
 
-.big-logo-wrapper>img {
+.big-logo-wrapper > img {
   height: 12vh;
   width: 12vh;
 }
