@@ -27,16 +27,15 @@ export default {
   }),
 
   methods: {
-    _navigate(route) {
-      return new Promise(() => {
-        this.$router.push({ name: route });
-      });
-    },
   },
 
-
-  mounted(){
-    this._navigate('login');
+  created() {
+     this.$router
+          .push({name: 'login'})
+          .then(() => {
+            console.log("route: " + name);
+          })
+          .catch((err) => console.err(err));
   },
 
   watch: {

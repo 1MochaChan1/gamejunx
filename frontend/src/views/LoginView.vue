@@ -56,6 +56,7 @@ export default {
       console.log("Forgot password link pressed");
     },
     getResponse() {
+     
       axios.get();
       const path = "http://jsonplaceholder.typicode.com/posts";
       axios.get(path).then((res) => {
@@ -65,6 +66,10 @@ export default {
         console.error(err)
       });
     },
+  },
+
+  created(){
+    console.log("Login page created");
   },
   
   components: {

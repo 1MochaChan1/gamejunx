@@ -1,6 +1,5 @@
 <template>
   <AuthWrapper/>
-  
 </template>
 
 <script>
