@@ -68,8 +68,11 @@ export default {
     },
   },
 
-  created(){
-    console.log("Login page created");
+  mounted () {
+    console.log("something");
+    axios
+      .get('http://127.0.0.1:5000/users')
+      .then(response => (console.log(response ))).catch((err)=> console.err(err));
   },
   
   components: {

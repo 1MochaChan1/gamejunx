@@ -27,15 +27,18 @@ export default {
   }),
 
   methods: {
+    _navigate(routeName){
+       this.$router
+          .push({name:routeName})
+          .then(() => {
+            console.log("route: "+routeName);
+          })
+          .catch((err) => console.err(err));
+    }
   },
 
   created() {
-     this.$router
-          .push({name: 'login'})
-          .then(() => {
-            console.log("route: " + name);
-          })
-          .catch((err) => console.err(err));
+    this._navigate('login');
   },
 
   watch: {
