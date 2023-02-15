@@ -1,4 +1,4 @@
-from app import flask_app, db
+from app import db
 import hashlib
 
 def encode_password(text:str)->str:
@@ -12,16 +12,9 @@ class User(db.Model):
     email = db.Column(db.String(400), nullable=False)
     password = db.Column(db.String(400), nullable=False)
 
-
-
     def __init__(self, name, username, email, password):
         self.name = name
         self.username = username
         self.email = email
         self.password = encode_password(password)
 
-@flask_app.route('/users', methods=['GET'])
-def users():
-    all_data = User.query.all()
-    user:User = all_data[0]
-    return user.username

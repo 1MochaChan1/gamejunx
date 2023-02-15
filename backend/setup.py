@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="app",
-    packages=["app", "models"],
+    packages=["app", "models", "router"],
     include_package_data=True,
     install_requires=['flask']
 )
