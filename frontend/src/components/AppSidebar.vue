@@ -2,22 +2,22 @@
   <div>
     <aside>
       <div>
-        <router-link class="button body1" to="/home">
+        <router-link class="sidebar-button body1" to="/home">
           <span><fa-icon icon="home" /></span>
           <div><p>Home</p></div>
         </router-link>
 
-        <router-link class="button body1" to="/wishlist">
+        <router-link class="sidebar-button body1" to="/wishlist">
           <span><fa-icon icon="heart" /></span>
           <div><p>Wishlist</p></div>
         </router-link>
 
-        <router-link class="button body1" to="/games">
+        <router-link class="sidebar-button body1" to="/games">
           <span><fa-icon icon="tag" /></span>
           <div><p>Games</p></div>
         </router-link>
 
-        <router-link class="button body1" to="/libraries">
+        <router-link class="sidebar-button body1" to="/libraries">
           <span><fa-icon icon="gamepad" /></span>
           <div><p>Libraries</p></div>
         </router-link>
@@ -25,20 +25,20 @@
 
       <div>
         <div class="divider"></div>
-        <router-link class="button body1" to="/profile">
+        <router-link class="sidebar-button body1" to="/profile">
           <span><fa-icon icon="user" /></span>
           <div><p>Profile</p></div>
         </router-link>
 
-        <router-link class="button body1" to="/settings">
+        <router-link class="sidebar-button body1" to="/settings">
           <span><fa-icon icon="gear" /></span>
           <div><p>Settings</p></div>
         </router-link>
 
-        <div class="button body1" to="">
+        <router-link @click="this.clearStorage()" class="sidebar-button body1" to="/login">
           <span><fa-icon icon="sign-out" /></span>
           <div><p>Sign Out</p></div>
-        </div>
+        </router-link>
       </div>
     </aside>
   </div>
@@ -52,6 +52,11 @@ export default {
       selected: null,
     };
   },
+  methods: {
+    clearStorage(){
+      localStorage.clear();
+    }
+  }
 };
 </script>
 
@@ -76,7 +81,7 @@ aside .divider {
   border-radius: 1em;
 }
 
-.button {
+.sidebar-button {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -86,7 +91,7 @@ aside .divider {
   color: var(--neutral-unfocused-color);
 }
 
-.button:hover {
+.sidebar-button:hover {
   padding: 8px;
   transition: 0.2s;
 }

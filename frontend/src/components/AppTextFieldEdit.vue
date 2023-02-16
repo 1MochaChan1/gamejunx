@@ -4,23 +4,25 @@
       class="custom-textfield"
       type="text"
       :placeholder="hint"
-      v-model="value"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
     <div v-show="showIcon" class="textfield-icon" @click="edit()">
       <fa-icon icon="pen" />
     </div>
+    
   </div>
+  
 </template>
 
 <script>
 export default {
   name: "AppTextFieldEdit",
-  data() {
-    return {
-      value: "",
-    };
-  },
+  emits: ["update:modelValue"],
   props: {
+    modelValue: {
+      
+    },
     hint: {
       type: String,
     },
@@ -28,9 +30,9 @@ export default {
       type: Boolean,
       default: false,
     },
-    label:{
-      type:String
-    }
+    label: {
+      type: String,
+    },
   },
   methods: {
     edit() {

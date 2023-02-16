@@ -10,11 +10,12 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import router from './router/index.js'
 import App from './App.vue'
-library.add(fas, far, fab);
 
+library.add(fas, far, fab);
 const app= createApp(App)
 
 app.use(router)
-
 app.component('fa-icon', FontAwesomeIcon)
 app.mount('#app')
+
+app.config.globalProperties.showAppBar = false;

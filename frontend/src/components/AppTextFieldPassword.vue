@@ -4,7 +4,8 @@
       class="custom-textfield"
       :type="inputType"
       :placeholder="hint"
-      v-model="value"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
     <div class="textfield-icon" @click="toggle()">
       <fa-icon v-if="showPassword" icon="eye-slash" />
@@ -18,19 +19,24 @@ export default {
   name: "AppTextFieldPassword",
   data() {
     return {
-      value: "",
-      showPassword:false,
-      inputType:'password',
+      showPassword: false,
+      inputType: "password",
     };
   },
-  props: ['hint'],
+  emits: ["update:modelValue"],
+  props: {
+    hint: {
+      type: String,
+    },
+    modelValue: {},
+  },
 
-  methods:{
-    toggle(){
+  methods: {
+    toggle() {
       this.showPassword = !this.showPassword;
-      this.inputType = this.showPassword?'text':'password';
-    }
-  }
+      this.inputType = this.showPassword ? "text" : "password";
+    },
+  },
 };
 </script>
 
