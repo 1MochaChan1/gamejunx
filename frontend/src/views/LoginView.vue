@@ -28,7 +28,7 @@
               <p>Remember Me</p>
             </label>
           </div>
-          <AppButton @onClick="login()" />
+          <AppButton />
 
           <div class="login-wrapper">
             <p class="link2" @click="forgotPassword()">Forgot password</p>
@@ -61,35 +61,27 @@ export default {
       this.rememberMe = !this.rememberMe;
     },
 
-    login() {
+    async login() {
       console.log("Login button pressed!");
-      const path = "http://127.0.0.1:5000/users";
-      axios.post(path);
+      const path = "http://127.0.0.1:5000/login";
+      let response = await axios.post(path,{
+        username:this.username,
+        password:this.password
+      });
+
+      switch(response.status){
+        case 200:
+          localStorage.setItem('token', response.data.token)
+          this.$router.push('/home')
+      }
+      // localStorage.setItem('token', response.data.token)
     },
     forgotPassword() {
       console.log("Forgot password link pressed");
     },
-    getResponse() {
-      axios.get();
-      const path = "http://jsonplaceholder.typicode.com/posts";
-      axios
-        .get(path)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    },
+    
   },
 
-  mounted() {
-    console.log("something");
-    axios
-      .get("http://127.0.0.1:5000/users")
-      .then((response) => console.log(response))
-      .catch((err) => console.err(err));
-  },
 
   components: {
     AppLogo,

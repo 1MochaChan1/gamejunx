@@ -1,18 +1,17 @@
 <template>
-  <div v-if="!isAuthScreen">
+  <div v-if="shouldShowSidebar">
     <AppHeader />
     <div class="app">
       <AppSidebar />
       <router-view class="router-style" />
     </div>
   </div>
-  <div v-else-if="isAuthScreen">
+  <div v-else-if="!shouldShowSidebar">
     <router-view class="router-style" />
   </div>
 </template>
 
 <script>
-import { authfields } from "../global.js";
 import AppHeader from "../components/AppHeader.vue";
 import AppSidebar from "../components/AppSidebar.vue";
 
@@ -22,33 +21,11 @@ export default {
     AppHeader,
     AppSidebar,
   },
-  data: () => ({
-    isAuthScreen: false,
-  }),
+  data: () => ({}),
 
-  methods: {
-    _navigate(routeName){
-       this.$router
-          .push({name:routeName})
-          .then(() => {
-            console.log("route: "+routeName);
-          })
-          .catch((err) => console.err(err));
-    }
-  },
-
-  created() {
-    this._navigate('login');
-  },
-
-  watch: {
-    $route() {
-      let curRoute = this.$router.currentRoute.value.name;
-      if (authfields.indexOf(curRoute) != -1) {
-        this.isAuthScreen = true;
-      } else {
-        this.isAuthScreen = false;
-      }
+  computed: {
+    shouldShowSidebar() {
+      return this.$route.meta.sidebar !== false;
     },
   },
 };

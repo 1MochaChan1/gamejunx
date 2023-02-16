@@ -35,10 +35,10 @@
           <div><p>Settings</p></div>
         </router-link>
 
-        <div class="sidebar-button body1" to="">
+        <router-link @click="this.clearStorage()" class="sidebar-button body1" to="/login">
           <span><fa-icon icon="sign-out" /></span>
           <div><p>Sign Out</p></div>
-        </div>
+        </router-link>
       </div>
     </aside>
   </div>
@@ -52,6 +52,11 @@ export default {
       selected: null,
     };
   },
+  methods: {
+    clearStorage(){
+      localStorage.clear();
+    }
+  }
 };
 </script>
 

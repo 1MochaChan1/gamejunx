@@ -1,5 +1,5 @@
 <template>
-  <AuthWrapper/>
+  <AuthWrapper />
 </template>
 
 <script>
@@ -9,23 +9,11 @@ import AuthWrapper from "./components/AuthWrapper.vue";
 
 export default {
   name: "App",
-  data:() => (
-    {
-      isAuthScreen: false,
-    }),
+  data: () => ({}),
   components: {
-    // AppHeader,
-    // AppSidebar,
     AuthWrapper,
   },
-  method:{
-    toggle(value){
-      this.isAuthScreen=value;
-    }
-  },
-  mounted: function () {
-    
-  },
+  method: {},
 };
 </script>
 
@@ -36,5 +24,4 @@ export default {
   gap: 24px;
   padding: 0px 16px;
 }
-
 </style>

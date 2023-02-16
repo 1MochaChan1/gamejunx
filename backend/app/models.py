@@ -1,9 +1,6 @@
 from app import db
-import hashlib
+from app.helpers import encode_password
 
-def encode_password(text:str)->str:
-    encrypted_string:str= hashlib.md5(text.encode('utf')).hexdigest()
-    return encrypted_string
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,9 +9,19 @@ class User(db.Model):
     email = db.Column(db.String(400), nullable=False)
     password = db.Column(db.String(400), nullable=False)
 
+    def toMap(self):
+        _map = {}
+        _map['id']=self.id
+        _map['name']=self.name
+        _map['username']=self.username
+        _map['email']=self.email
+        return _map
+
+    def __repr__(self):
+        return f'User(id:{self.id},name:{self.name}, username:{self.username}, email:{self.email})'
+
     def __init__(self, name, username, email, password):
         self.name = name
         self.username = username
         self.email = email
         self.password = encode_password(password)
-
