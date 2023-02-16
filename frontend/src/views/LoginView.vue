@@ -2,7 +2,7 @@
   <form @submit.prevent="this.login" method="POST">
     <div class="container">
       <img src="../assets/images/login.jpg" alt="" />
-      <div class="login-container">
+      <div>
         <AppLogo />
 
         <div class="login-container-wrapper">
@@ -28,15 +28,15 @@
               <p>Remember Me</p>
             </label>
           </div>
-          <AppButton />
+          <AppButton :label="'Login'"/>
 
           <div class="login-wrapper">
             <p class="link2" @click="forgotPassword()">Forgot password</p>
           </div>
-          <div class="signup-wrapper">
+          <router-link class="signup-wrapper" to="/signup">
             <span> <p>Don't have an account?</p> </span>
             <span> <p class="link2">Signup Now</p> </span>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -55,6 +55,7 @@ export default {
     username: "",
     password: "",
   }),
+
   name: "LoginView",
   methods: {
     toggle() {
@@ -63,8 +64,8 @@ export default {
 
     async login() {
       console.log("Login button pressed!");
-      const path = "http://127.0.0.1:5000/login";
-      let response = await axios.post(path,{
+
+      let response = await axios.post(this.baseUrl+"/login",{
         username:this.username,
         password:this.password
       });
@@ -120,9 +121,11 @@ export default {
   justify-content: flex-end;
 }
 .signup-wrapper {
-  margin-top: 40px;
+  margin-top: 32px;
   display: flex;
   gap: 8px;
+  text-decoration: none;
+  color: var(--neutral-text-color);
   justify-content: center;
 }
 

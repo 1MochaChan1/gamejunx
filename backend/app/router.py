@@ -23,7 +23,7 @@ def token_required(func):
     return decorated
 
 # <---- landing ----> #
-@flask_app.route('/', methods=['GET'])
+@flask_app.route('/test', methods=['GET'])
 @token_required
 def landing():
     return "User Logged in"
@@ -52,8 +52,7 @@ def login():
         if (_user):
             session['logged_in'] = True
 
-            token = jwt.encode({'user': _username, 'expiration': str(
-                datetime.utcnow()+timedelta(seconds=600))}, flask_app.config['SECRET_KEY'], algorithm='HS256')
+            token = jwt.encode({'user': _username, }, flask_app.config['SECRET_KEY'], algorithm='HS256')
 
             res['user'] = _user.toMap()
             res['token'] = token
