@@ -2,7 +2,7 @@
   <form @submit.prevent="this.signup" method="POST">
     <div class="container">
       <img src="../assets/images/signup.jpg" alt="" />
-      <div >
+      <div>
         <AppLogo />
 
         <div class="signup-container-wrapper">
@@ -20,20 +20,30 @@
               v-model="email"
               :hint="'Email'"
             />
+            <span v-if="v$.email.$error" class="error-message">
+              {{ v$.email.$errors[0].$message }}
+            </span>
+
             <AppTextFieldPassword
-              v-model="password"
+              v-model="this.formPassword.password"
               :hint="'•••••••'"
               :showIcon="true"
             />
+            <span v-if="v$.formPassword.password.$error" class="error-message">
+              {{ v$.formPassword.password.$errors[0].$message }}
+            </span>
             <AppTextFieldPassword
-              v-model="c_password"
+              v-model="this.formPassword.confirmed"
               :hint="'•••••••'"
               :showIcon="true"
             />
+            <span v-if="v$.formPassword.confirmed.$error" class="error-message">
+              {{ v$.formPassword.confirmed.$errors[0].$message }}
+            </span>
           </div>
           <div class="vertical-space"></div>
 
-          <AppButton :label="'Sign Up'"/>
+          <AppButton :label="'Sign Up'" />
 
           <router-link class="login-wrapper" to="/login">
             <span> <p>Already have an account?</p> </span>
@@ -47,6 +57,8 @@
 
 <script>
 // import axios from "axios";
+import useVuedilate from "@vuelidate/core";
+import { required, email, minLength, helpers } from "@vuelidate/validators";
 import AppLogo from "../components/AppLogo.vue";
 import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
 import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
@@ -54,15 +66,48 @@ import AppButton from "../components/AppButton.vue";
 export default {
   name: "SignupView",
 
+  // use v$.email.$touch() to access field individually
+  // use v$.$validate() to validate the entire form.
+  setup: () => ({
+    v$: useVuedilate(),
+  }),
+
+  validations: () => ({
+    username: { required },
+    email: { required, email },
+    formPassword: {
+      password: {
+        required,
+        minLength: minLength(8),
+      },
+      confirmed: {
+        required,
+        sameAs: helpers.withMessage("The password does not match", function () {
+          return this.formPassword.password == this.formPassword.confirmed;
+        }),
+      },
+    },
+  }),
+
   data: () => ({
     username: "",
     email: "",
-    password: "",
-    c_password: "",
+    formPassword: {
+      password: "",
+      confirmed: "",
+    },
   }),
 
   methods: {
-    signup() {},
+    async signup() {
+      const isValid = await this.v$.$validate();
+      console.log(this.v$);
+      if (isValid) {
+        alert("Show something");
+      } else {
+        alert("some error");
+      }
+    },
   },
   components: {
     AppLogo,
@@ -115,8 +160,15 @@ export default {
   margin-bottom: 5vh;
 }
 
-.vertical-space{
+.vertical-space {
   height: 24px;
+}
+
+.error-message {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  font-size: 12px;
+  color: red;
 }
 
 label {
