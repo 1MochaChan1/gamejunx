@@ -13,55 +13,56 @@ const routes = [
   {
     path: "/",
     name: "wrapper",
-    meta: { sidebar: false },
+    redirect:"login",
+    meta: { sidebar: false, authRequired: false },
     component: AuthWrapper,
   },
   {
     path: "/home",
     name: "home",
-    meta: { sidebar: true },
+    meta: { sidebar: true, authRequired: true },
     component: HomeView,
   },
 
   {
     path: "/wishlist",
     name: "wishlist",
-    meta: { sidebar: true },
+    meta: { sidebar: true, authRequired: true },
     component: WishlistView,
   },
   {
     path: "/games",
     name: "games",
-    meta: { sidebar: true },
+    meta: { sidebar: true, authRequired: true },
     component: GamesView,
   },
   {
     path: "/libraries",
     name: "libraries",
-    meta: { sidebar: true },
+    meta: { sidebar: true, authRequired: true },
     component: LibrariesView,
   },
   {
     path: "/profile",
     name: "profile",
-    meta: { sidebar: true },
+    meta: { sidebar: true, authRequired: true },
     component: ProfileView,
   },
   {
     path: "/settings",
     name: "settings",
-    meta: { sidebar: true },
+    meta: { sidebar: true, authRequired: true },
     component: SettingsView,
   },
   {
     path: "/signup",
-    meta: { sidebar: false },
+    meta: { sidebar: false, authRequired: false },
     name: "signup",
     component: SignupView,
   },
   {
     path: "/login",
-    meta: { sidebar: false },
+    meta: { sidebar: false, authRequired: false },
     name: "login",
     component: LoginView,
   },
@@ -74,10 +75,11 @@ const router = createRouter({
 
 /* eslint-disable no-unused-vars */
 router.beforeEach(async (to, from) => {
-    let token = localStorage.getItem('token');
-    if(token==null && to.name !='login'){
-        return {name:'login'}
-    }
+  let token = localStorage.getItem("token");
+
+  if (token == null && to.meta["authRequired"] ) {
+    return { name: "login" };
+  }
 });
 /* eslint-enable no-unused-vars */
 export default router;

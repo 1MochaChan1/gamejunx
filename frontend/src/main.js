@@ -18,4 +18,4 @@ app.use(router)
 app.component('fa-icon', FontAwesomeIcon)
 app.mount('#app')
 
-app.config.globalProperties.showAppBar = false;
+app.config.globalProperties.baseUrl = 'http://127.0.0.1:5000/';
