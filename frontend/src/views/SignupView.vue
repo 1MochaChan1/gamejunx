@@ -10,36 +10,64 @@
             <img src="../assets/svg/app_bar_logo.svg" alt="" />
           </div>
           <div class="textfield-container">
-            <AppTextFieldEdit
-              class="no-icon-field"
-              v-model="username"
-              :hint="'Username'"
-            />
-            <AppTextFieldEdit
-              class="no-icon-field"
-              v-model="email"
-              :hint="'Email'"
-            />
-            <span v-if="v$.email.$error" class="error-message">
-              {{ v$.email.$errors[0].$message }}
-            </span>
+            <div>
+              <AppTextFieldEdit
+                class="no-icon-field"
+                v-model="name"
+                :hint="'Name'"
+              />
+              <span v-if="v$.name.$error" class="error-message">{{
+                v$.name.$errors[0].$message
+              }}</span>
+            </div>
+            <div>
+              <AppTextFieldEdit
+                class="no-icon-field"
+                v-model="username"
+                :hint="'Username'"
+              />
+              <span v-if="v$.username.$error" class="error-message">{{
+                v$.username.$errors[0].$message
+              }}</span>
+            </div>
+            <div>
+              <AppTextFieldEdit
+                class="no-icon-field"
+                v-model="email"
+                :hint="'Email'"
+              />
+              <span v-if="v$.email.$error" class="error-message">
+                {{ v$.email.$errors[0].$message }}
+              </span>
+            </div>
 
-            <AppTextFieldPassword
-              v-model="this.formPassword.password"
-              :hint="'•••••••'"
-              :showIcon="true"
-            />
-            <span v-if="v$.formPassword.password.$error" class="error-message">
-              {{ v$.formPassword.password.$errors[0].$message }}
-            </span>
-            <AppTextFieldPassword
-              v-model="this.formPassword.confirmed"
-              :hint="'•••••••'"
-              :showIcon="true"
-            />
-            <span v-if="v$.formPassword.confirmed.$error" class="error-message">
-              {{ v$.formPassword.confirmed.$errors[0].$message }}
-            </span>
+            <div>
+              <AppTextFieldPassword
+                v-model="this.formPassword.password"
+                :hint="'Password'"
+                :showIcon="true"
+              />
+              <span
+                v-if="v$.formPassword.password.$error"
+                class="error-message"
+              >
+                {{ v$.formPassword.password.$errors[0].$message }}
+              </span>
+            </div>
+
+            <div>
+              <AppTextFieldPassword
+                v-model="this.formPassword.confirmed"
+                :hint="'Confirm Password'"
+                :showIcon="true"
+              />
+              <span
+                v-if="v$.formPassword.confirmed.$error"
+                class="error-message"
+              >
+                {{ v$.formPassword.confirmed.$errors[0].$message }}
+              </span>
+            </div>
           </div>
           <div class="vertical-space"></div>
 
@@ -63,6 +91,8 @@ import AppLogo from "../components/AppLogo.vue";
 import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
 import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
 import AppButton from "../components/AppButton.vue";
+import axios from "axios";
+
 export default {
   name: "SignupView",
 
@@ -72,16 +102,33 @@ export default {
     v$: useVuedilate(),
   }),
 
+  data: () => ({
+    name: "sda",
+    username: "adads",
+    email: "dsa@mail.com",
+    formPassword: {
+      password: "123456789",
+      confirmed: "123456789",
+    },
+  }),
+
   validations: () => ({
-    username: { required },
-    email: { required, email },
+    name: {
+      required: helpers.withMessage("Name can't be empty", required),
+    },
+    username: {
+      required: helpers.withMessage("Username can't be empty", required),
+    },
+    email: {
+      required: helpers.withMessage("Email can't be empty", required),
+      email: helpers.withMessage("Please provide a valid email", email),
+    },
     formPassword: {
       password: {
-        required,
+        required: helpers.withMessage("Password can't be empty", required),
         minLength: minLength(8),
       },
       confirmed: {
-        required,
         sameAs: helpers.withMessage("The password does not match", function () {
           return this.formPassword.password == this.formPassword.confirmed;
         }),
@@ -89,26 +136,29 @@ export default {
     },
   }),
 
-  data: () => ({
-    username: "",
-    email: "",
-    formPassword: {
-      password: "",
-      confirmed: "",
-    },
-  }),
-
   methods: {
     async signup() {
-      const isValid = await this.v$.$validate();
-      console.log(this.v$);
+      let isValid = await this.v$.$validate();
       if (isValid) {
-        alert("Show something");
-      } else {
-        alert("some error");
+        await axios
+          .post(this.baseUrl + "/signup", {
+            name: this.name,
+            username: this.username,
+            email: this.email,
+            password: this.formPassword.password,
+          })
+          .then((e) => {
+            if (e.data.status == "success") {
+              this.$router.push("login");
+            }
+          })
+          .catch((e) => {
+            alert(e.response.data.message);
+          });
       }
     },
   },
+
   components: {
     AppLogo,
     AppTextFieldEdit,
@@ -132,7 +182,7 @@ export default {
   gap: 16px;
 }
 
-.textfield-container > .no-icon-field {
+.no-icon-field {
   width: calc(var(--textfield-width) - 25px);
 }
 
@@ -162,13 +212,6 @@ export default {
 
 .vertical-space {
   height: 24px;
-}
-
-.error-message {
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-regular);
-  font-size: 12px;
-  color: red;
 }
 
 label {

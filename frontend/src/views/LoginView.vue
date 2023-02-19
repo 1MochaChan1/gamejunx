@@ -10,16 +10,27 @@
             <img src="../assets/svg/app_bar_logo.svg" alt="" />
           </div>
           <div class="textfield-container">
-            <AppTextFieldEdit
-              class="no-icon-field"
-              v-model="username"
-              :hint="'Username'"
-            />
-            <AppTextFieldPassword
-              v-model="password"
-              :hint="'•••••••'"
-              :showIcon="true"
-            />
+            <div>
+              <AppTextFieldEdit
+                class="no-icon-field"
+                v-model="username"
+                :hint="'Username'"
+              />
+              <span v-if="v$.username.$error" class="error-message">{{
+                v$.username.$errors[0].$message
+              }}</span>
+            </div>
+
+            <div>
+              <AppTextFieldPassword
+                v-model="password"
+                :hint="'•••••••'"
+                :showIcon="true"
+              />
+              <span v-if="v$.password.$error" class="error-message">{{
+                v$.username.$errors[0].$message
+              }}</span>
+            </div>
           </div>
 
           <div class="checkbox-wrapper">
@@ -28,7 +39,7 @@
               <p>Remember Me</p>
             </label>
           </div>
-          <AppButton :label="'Login'"/>
+          <AppButton :label="'Login'" />
 
           <div class="login-wrapper">
             <p class="link2" @click="forgotPassword()">Forgot password</p>
@@ -49,11 +60,32 @@ import AppLogo from "../components/AppLogo.vue";
 import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
 import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
 import AppButton from "../components/AppButton.vue";
+import { required, helpers } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 export default {
+  setup: () => ({
+    v$: useVuelidate(),
+  }),
+
   data: () => ({
     rememberMe: true,
     username: "",
     password: "",
+  }),
+
+  validations: () => ({
+    username: {
+      required: helpers.withMessage(
+        "This field can't be left empty!",
+        required
+      ),
+    },
+    password: {
+      required: helpers.withMessage(
+        "This field can't be left empty!",
+        required
+      ),
+    },
   }),
 
   name: "LoginView",
@@ -63,26 +95,28 @@ export default {
     },
 
     async login() {
+      let isValid = await this.v$.$validate();
       console.log("Login button pressed!");
+      console.log(isValid);
 
-      let response = await axios.post(this.baseUrl+"/login",{
-        username:this.username,
-        password:this.password
-      });
+      if (isValid) {
+        let response = await axios.post(this.baseUrl + "/login", {
+          username: this.username,
+          password: this.password,
+        });
 
-      switch(response.status){
-        case 200:
-          localStorage.setItem('token', response.data.token)
-          this.$router.push('/home')
+        switch (response.status) {
+          case 200:
+            localStorage.setItem("token", response.data.token);
+            this.$router.push("/home");
+        }
       }
       // localStorage.setItem('token', response.data.token)
     },
     forgotPassword() {
       console.log("Forgot password link pressed");
     },
-    
   },
-
 
   components: {
     AppLogo,
@@ -107,7 +141,7 @@ export default {
   gap: 16px;
 }
 
-.textfield-container > .no-icon-field {
+.no-icon-field {
   width: calc(var(--textfield-width) - 25px);
 }
 

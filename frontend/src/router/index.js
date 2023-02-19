@@ -13,6 +13,7 @@ const routes = [
   {
     path: "/",
     name: "wrapper",
+    redirect:"login",
     meta: { sidebar: false, authRequired: false },
     component: AuthWrapper,
   },
@@ -75,7 +76,8 @@ const router = createRouter({
 /* eslint-disable no-unused-vars */
 router.beforeEach(async (to, from) => {
   let token = localStorage.getItem("token");
-  if (token == null && to.meta["authRequired"]) {
+
+  if (token == null && to.meta["authRequired"] ) {
     return { name: "login" };
   }
 });

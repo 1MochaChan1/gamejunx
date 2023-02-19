@@ -23,6 +23,13 @@ export default {
   },
   data: () => ({}),
 
+  created() {
+    
+    if (localStorage.getItem('token')!=null) {
+      this.$router.push("home");
+    }
+  },
+
   computed: {
     shouldShowSidebar() {
       return this.$route.meta.sidebar !== false;

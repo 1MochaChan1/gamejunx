@@ -2,14 +2,19 @@
 
 :root {
   --primary-color: #fb2576;
+
   --secondary-color: #00e0ff;
   --secondary-dark-color: #00d6f3;
+
   --neutral-background-color: #161616;
   --neutral-tile-color: #101010;
   --neutral-text-icon-color: #ffffff;
   --neutral-unfocused-color: #4f4f4f;
   --neutral-indicator-color: #2f2f2f;
   --neutral-dark-color: #202020;
+
+  --semantics-error-color:#FF7070;
+  --semantics-success-color:#9EFF95;
 
   --font-family: "Montserrat", sans-serif;
 
@@ -181,6 +186,7 @@ input[type="checkbox"]:checked {
   color: var(--neutral-text-icon-color);
   border-color: var(--neutral-text-icon-color);
 }
+
 input[type="checkbox"] {
   cursor: pointer;
 }
@@ -200,4 +206,13 @@ input[type="checkbox"] {
 }
 .button:hover {
   background-color: var(--secondary-dark-color);
+}
+
+.error-message {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  font-size: 12px;
+  margin-top: 4px;
+  margin-left: 4px;
+  color: var(--semantics-error-color);
 }
