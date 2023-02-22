@@ -7,6 +7,7 @@
       <AppTextFieldEdit @edit="edit" hint="Edit Field"/>
       <AppTextFieldEdit @edit="edit" hint="Edit Field With Icon" :showIcon="true"/>
       <AppTextField hint="Normal Field"/>
+      <GameTile />
     </div>
   </div>
  
@@ -16,9 +17,11 @@
 import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
 import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
 import AppTextField from "../components/AppTextField.vue";
+import GameTile from "../components/GameTile.vue";
+
 export default {
   name: "HomeView",
-  components: { AppTextFieldPassword,AppTextFieldEdit, AppTextField },
+  components: { AppTextFieldPassword,AppTextFieldEdit, AppTextField, GameTile },
 
   methods:{
     edit(){

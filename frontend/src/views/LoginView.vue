@@ -14,7 +14,7 @@
               <AppTextFieldEdit
                 class="no-icon-field"
                 v-model="username"
-                :hint="'Username'"
+                :hint="'Username or Email'"
               />
               <span v-if="v$.username.$error" class="error-message">{{
                 v$.username.$errors[0].$message
@@ -96,8 +96,6 @@ export default {
 
     async login() {
       let isValid = await this.v$.$validate();
-      console.log("Login button pressed!");
-      console.log(isValid);
 
       if (isValid) {
         let response = await axios.post(this.baseUrl + "/login", {

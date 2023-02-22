@@ -103,12 +103,12 @@ export default {
   }),
 
   data: () => ({
-    name: "sda",
-    username: "adads",
-    email: "dsa@mail.com",
+    name: "",
+    username: "",
+    email: "",
     formPassword: {
-      password: "123456789",
-      confirmed: "123456789",
+      password: "",
+      confirmed: "",
     },
   }),
 
