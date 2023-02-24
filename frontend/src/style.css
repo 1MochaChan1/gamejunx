@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
 :root {
+  /* Colors */
   --primary-color: #fb2576;
 
   --secondary-color: #00e0ff;
   --secondary-dark-color: #00d6f3;
 
-  --neutral-background-color: #161616;
+  /* --neutral-background-color: #161616; */
+  --neutral-background-color: #1b1b1b;
   --neutral-tile-color: #101010;
   --neutral-text-icon-color: #ffffff;
   --neutral-unfocused-color: #4f4f4f;
@@ -16,6 +18,9 @@
   --semantics-error-color:#FF7070;
   --semantics-success-color:#9EFF95;
 
+  --shadow-tile: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  /* Typography */
   --font-family: "Montserrat", sans-serif;
 
   --font-weight-regular: 400;
@@ -24,7 +29,20 @@
   --font-weight-bold: 700;
 
   --textfield-width: 360px;
+
+  /* Spacing */
+  --tile-rad-12: 12px;
+  --text-mg-2:2px;
+
+  /* Sizing */
+  --tile-height: 160px;
+  --tile-height-hover: 216px;
+  --tile-width: 142px;
+
+  /* Time */
+  --tile-transition-time: 200ms;
 }
+
 
 h1 {
   font-family: var(--font-family);
@@ -76,7 +94,7 @@ p.subtitle1 {
 
 p.subtitle2 {
   font-family: var(--font-family);
-
+  margin: var(--text-mg-2);
   font-weight: var(--font-weight-regular);
   font-size: 14px;
 }
@@ -95,7 +113,7 @@ p {
 
 p.body2 {
   font-family: var(--font-family);
-
+  margin: var(--text-mg-2);
   font-weight: var(--font-weight-regular);
   font-size: 10px;
 }
@@ -132,7 +150,7 @@ p.link2 {
 
 p.caption {
   font-family: var(--font-family);
-
+  margin: var(--text-mg-2);
   font-weight: var(--font-weight-regular);
   font-size: 8px;
 }
@@ -150,33 +168,6 @@ body {
 
 .router-style {
   margin: 0px;
-}
-
-.custom-textfield,
-textarea {
-  /* display: flex; */
-
-  /* border */
-  border: none;
-  border-radius: 8px;
-
-  /* dimensionos */
-  height: 28px;
-  width: 100%;
-
-  /* spacing and alignment */
-  padding-left: 8px;
-  padding-right: 8px;
-  /* align-self: stretch; */
-
-  /* color */
-  color: var(--neutral-text-icon-color);
-  background-color: var(--neutral-indicator-color);
-
-  /* font */
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-regular);
-  font-size: 14px;
 }
 
 input[type="checkbox"]:checked {
@@ -215,4 +206,29 @@ input[type="checkbox"] {
   margin-top: 4px;
   margin-left: 4px;
   color: var(--semantics-error-color);
+}
+
+.custom-textfield,
+textarea {
+
+  /* border */
+  border: none;
+  border-radius: 8px;
+
+  /* dimensionos */
+  height: 28px;
+  width: 100%;
+
+  /* spacing and alignment */
+  padding-left: 8px;
+  padding-right: 8px;
+
+  /* color */
+  color: var(--neutral-text-icon-color);
+  background-color: var(--neutral-indicator-color);
+
+  /* font */
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  font-size: 14px;
 }

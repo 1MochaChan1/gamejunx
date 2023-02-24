@@ -41,7 +41,6 @@ export default {
   display: flex;
   flex-direction: column;
   width:360px;
-  direction: column;
   gap:8px;
 }
 </style>
