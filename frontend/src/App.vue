@@ -9,7 +9,6 @@ import AuthWrapper from "./components/AuthWrapper.vue";
 
 export default {
   name: "App",
-  data: () => ({}),
   components: {
     AuthWrapper,
   },
