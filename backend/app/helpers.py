@@ -3,6 +3,12 @@ from app.colored_print import Colors, DebugPrint
 from app import request, wraps, jsonify, flask_app
 import jwt
 
+def strike_through(text):
+    result = '\u0336'
+    for c in text:
+        result += c + '\u0336'
+    return result
+
 def encode_password(text:str)->str:
     encrypted_string:str= hashlib.md5(text.encode('utf')).hexdigest()
     return encrypted_string
