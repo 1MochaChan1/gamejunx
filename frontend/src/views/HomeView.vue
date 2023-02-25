@@ -1,33 +1,29 @@
 <template>
   <div class="container">
-    
-    <h3>HomeView</h3>
-    <div class="textfield-parent">
-      <AppTextFieldPassword hint="Enter Password"/>
-      <AppTextFieldEdit @edit="edit" hint="Edit Field"/>
-      <AppTextFieldEdit @edit="edit" hint="Edit Field With Icon" :showIcon="true"/>
-      <AppTextField hint="Normal Field"/>
-      <GameTile />
-    </div>
+    <h3>Games</h3>
   </div>
- 
 </template>
 
 <script>
-import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
-import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
-import AppTextField from "../components/AppTextField.vue";
-import GameTile from "../components/GameTile.vue";
+// import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
+// import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
+// import AppTextField from "../components/AppTextField.vue";
+// import GameTile from "../components/GameTile.vue";
 
 export default {
   name: "HomeView",
-  components: { AppTextFieldPassword,AppTextFieldEdit, AppTextField, GameTile },
+  components: {
+    // AppTextFieldPassword,
+    // AppTextFieldEdit,
+    // AppTextField,
+    // GameTile,
+  },
 
-  methods:{
-    edit(){
+  methods: {
+    edit() {
       console.log("Edit event called");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -37,10 +33,10 @@ export default {
   width: 100vw;
 }
 
-.textfield-parent{
+.textfield-parent {
   display: flex;
   flex-direction: column;
-  width:360px;
-  gap:8px;
+  width: 360px;
+  gap: 8px;
 }
 </style>

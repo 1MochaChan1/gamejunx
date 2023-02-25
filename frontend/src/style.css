@@ -7,8 +7,8 @@
   --secondary-color: #00e0ff;
   --secondary-dark-color: #00d6f3;
 
-  /* --neutral-background-color: #161616; */
-  --neutral-background-color: #1b1b1b;
+  --neutral-background-color: #161616;
+  /* --neutral-background-color: #1b1b1b; */
   --neutral-tile-color: #101010;
   --neutral-text-icon-color: #ffffff;
   --neutral-unfocused-color: #4f4f4f;
@@ -60,7 +60,7 @@ h2 {
 
 h3 {
   font-family: var(--font-family);
-
+  margin: var(--text-mg-2);
   font-weight: var(--font-weight-semi-bold);
   font-size: 24px;
 }

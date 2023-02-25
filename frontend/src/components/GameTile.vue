@@ -10,7 +10,7 @@
       <div :class="{ 'image-holder-hover': hover, 'image-holder': !hover }">
         <img :src="this.img" alt="" />
         <p v-show="this.hover" class="subtitle1 title-container">
-          {{ this.name }}
+          {{ this.title }}
         </p>
       </div>
     </div>
@@ -99,7 +99,7 @@ export default {
     },
   },
   props: {
-    name: {
+    title: {
       type: String,
       default:
         "Revelation Online",
@@ -154,13 +154,13 @@ export default {
   position: absolute;
   bottom: 0px;
   left: 2px;
-  /*  */
+  /*  ---- overflow ---- */
   display: inline-block;
   width: calc(var(--tile-width) - 4px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  /*  */
+  /* ---- x ---- */
   z-index: 1;
   transition: var(--tile-transition-time);
 }
@@ -254,6 +254,7 @@ export default {
   padding-bottom: 4px;
   align-items: flex-end;
 }
+
 .platform-container img {
   height: 12px;
   width: 12px;
