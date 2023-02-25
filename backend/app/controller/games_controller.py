@@ -3,6 +3,7 @@ import urllib3
 from app.helpers import went_wrong, token_required, strike_through
 from app.models import User, Wishlist, Game
 from app.colored_print import DebugPrint, Colors
+from app.controller import secret
 import json
 
 free_games_base_url = "https://free-to-play-games-database.p.rapidapi.com/api"
@@ -11,15 +12,8 @@ sale_games_base_url = "https://cheapshark-game-deals.p.rapidapi.com"
 free_games_http = urllib3.PoolManager()
 sale_games_http = urllib3.PoolManager()
 
-free_games_http.headers = {
-    "X-RapidAPI-Key": "f31d2da92cmshd2f4fe4a7fa22b4p1b202djsn8c410f20d011",
-    "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com"
-}
-sale_games_http.headers = {
-    "X-RapidAPI-Key": "f31d2da92cmshd2f4fe4a7fa22b4p1b202djsn8c410f20d011",
-    "X-RapidAPI-Host": "cheapshark-game-deals.p.rapidapi.com"
-}
-
+free_games_http.headers = secret.free_games_http_headers
+sale_games_http.headers = secret.free_games_http_headers
 
 @flask_app.route('/get-games', methods=['GET'])
 @token_required
