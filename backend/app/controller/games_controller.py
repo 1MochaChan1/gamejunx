@@ -1,6 +1,6 @@
 from app import flask_app, db, jsonify
 import urllib3
-from app.helpers import went_wrong, token_required, strike_through
+from app.helpers import went_wrong, token_required, strike_through, get_platform
 from app.models import User, Wishlist, Game
 from app.colored_print import DebugPrint, Colors
 from app.controller import secret
@@ -13,13 +13,14 @@ free_games_http = urllib3.PoolManager()
 sale_games_http = urllib3.PoolManager()
 
 free_games_http.headers = secret.free_games_http_headers
-sale_games_http.headers = secret.free_games_http_headers
+sale_games_http.headers = secret.sale_games_http_headers
 
 @flask_app.route('/get-games', methods=['GET'])
 @token_required
 def get_games():
     free_games: list[Game] = []
     sale_games: list[Game] = []
+    res = {'status': 'success', 'message': 'none'}
     try:
         # Calling free games API
         free_games_res = free_games_http.request(
@@ -28,9 +29,10 @@ def get_games():
         free_games_json = json.loads(free_games_decoded)
 
         for go in free_games_json:
+            _platform = get_platform(go['platform'])
             # will remove this code block in future, it's here for testing
             _game = Game(title=go['title'], description=go['short_description'],
-                         tags=None, genre=go['genre'], platform=go['platform'],
+                         tags=None, genre=go['genre'], platform=_platform,
                          price='free', img=go['thumbnail'],
                          link=go['freetogame_profile_url'])
             free_games.append(_game.toMap())
@@ -55,12 +57,8 @@ def get_games():
                          link=f"https://www.cheapshark.com/redirect?dealID={go['dealID']}")
             sale_games.append(_game.toMap())
             
-        _map: dict = {
-            'free_games': free_games,
-            'sale_games': sale_games
-        }
-
-        return jsonify(_map)
+        res['free_games'] = free_games
+        res['sale_games'] = sale_games
+        return jsonify(res)
     except Exception as e:
-        DebugPrint(e, color=Colors.red)
         return went_wrong(e)

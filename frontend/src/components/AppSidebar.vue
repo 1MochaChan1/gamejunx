@@ -7,10 +7,10 @@
           <div><p>Home</p></div>
         </router-link>
 
-        <router-link class="sidebar-button body1" to="/wishlist">
+        <!-- <router-link class="sidebar-button body1" to="/wishlist">
           <span><fa-icon icon="heart" /></span>
           <div><p>Wishlist</p></div>
-        </router-link>
+        </router-link> -->
 
         <router-link class="sidebar-button body1" to="/games">
           <span><fa-icon icon="tag" /></span>

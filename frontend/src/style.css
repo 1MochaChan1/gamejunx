@@ -15,8 +15,8 @@
   --neutral-indicator-color: #2f2f2f;
   --neutral-dark-color: #202020;
 
-  --semantics-error-color:#FF7070;
-  --semantics-success-color:#9EFF95;
+  --semantics-error-color: #ff7070;
+  --semantics-success-color: #9eff95;
 
   --shadow-tile: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -32,7 +32,7 @@
 
   /* Spacing */
   --tile-rad-12: 12px;
-  --text-mg-2:2px;
+  --text-mg-2: 2px;
 
   /* Sizing */
   --tile-height: 160px;
@@ -42,7 +42,6 @@
   /* Time */
   --tile-transition-time: 200ms;
 }
-
 
 h1 {
   font-family: var(--font-family);
@@ -210,7 +209,6 @@ input[type="checkbox"] {
 
 .custom-textfield,
 textarea {
-
   /* border */
   border: none;
   border-radius: 8px;
@@ -231,4 +229,35 @@ textarea {
   font-family: var(--font-family);
   font-weight: var(--font-weight-regular);
   font-size: 14px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-inline: 24px;
+  margin-top: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-unfocused-color);
+  border-radius: 5em;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-indicator-color);
+  border-radius: 5em;
+  background-clip: content-box;
+}
+
+/* for mozilla */
+@supports (scrollbar-color: var(--neutral-unfocused-color) transparent) {
+  * {
+    scrollbar-color: var(--neutral-unfocused-color) transparent;
+    scrollbar-width: thin;
+    scroll-margin: 24px;
+  }
 }

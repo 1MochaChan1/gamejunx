@@ -25,6 +25,8 @@ export default {
   },
   data: () => ({}),
 
+
+
   created() {
     if (localStorage.getItem("token") != null) {
       this.$router.push("home");

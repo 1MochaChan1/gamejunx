@@ -1,7 +1,17 @@
 import hashlib
+import traceback
 from app.colored_print import Colors, DebugPrint
 from app import request, wraps, jsonify, flask_app
 import jwt
+
+
+def get_platform(platform:str):
+    if('pc' in platform.lower()):
+        return 'pc'
+    elif('browser' in platform.lower()):
+        return 'browser'
+    else:
+        return None
 
 def strike_through(text):
     result = '\u0336'
@@ -17,11 +27,10 @@ def token_required(func):
     @wraps(func)
     def decorated(*args, **kwargs):
         token=None
-        DebugPrint(request.headers)
         if('Authorization' in request.headers.keys()):
             token=str(request.headers['Authorization'])[7:]
         if (not token):
-            return jsonify({'Alert':'Token is missing!'}),401
+            return jsonify({'error':'Token is missing!'}),401
         try:
             jwt.decode(token, flask_app.config['SECRET_KEY'],algorithms=['HS256'])
             return(func(*args, **kwargs))
@@ -31,5 +40,6 @@ def token_required(func):
     return decorated
 
 def went_wrong(e:Exception):
-    DebugPrint(e, color=Colors.red)
+    DebugPrint(e, color=Colors.red, end='\n------------------------\n')
+    DebugPrint(''.join(traceback.TracebackException.from_exception(e).format()), color=Colors.error)
     return jsonify({"error":"Something went wrong"}),500

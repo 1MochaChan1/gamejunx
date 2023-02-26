@@ -1,6 +1,6 @@
 from app import flask_app, session, request, jsonify, datetime, wraps,timedelta
 from app.models import User
-from app.helpers import encode_password, token_required
+from app.helpers import encode_password, token_required, went_wrong
 from app.colored_print import DebugPrint, Colors
 import jwt
 
@@ -43,6 +43,5 @@ def login():
             return jsonify(res), 403
 
     except Exception as e:
-        DebugPrint(e, color=Colors.red)
-        return jsonify({"error":"Something went wrong"}),500
+        return went_wrong(e)
 

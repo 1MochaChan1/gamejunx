@@ -10,12 +10,14 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import router from './router/index.js'
 import App from './App.vue'
+import axios from 'axios';
 
 library.add(fas, far, fab);
-const app= createApp(App)
+const app = createApp(App)
 
 app.use(router)
 app.component('fa-icon', FontAwesomeIcon)
-app.mount('#app')
 
+axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem('token');
 app.config.globalProperties.baseUrl = 'http://127.0.0.1:5000/';
+app.mount('#app')
