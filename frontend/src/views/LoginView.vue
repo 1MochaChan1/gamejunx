@@ -106,13 +106,13 @@ export default {
         switch (response.status) {
           case 200:
             localStorage.setItem("token", response.data.token);
+            axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem('token');
             this.$router.push("/home");
         }
       }
-      // localStorage.setItem('token', response.data.token)
     },
     forgotPassword() {
-      console.log("Forgot password link pressed");
+      // console.log("Forgot password link pressed");
     },
   },
 

@@ -19,5 +19,6 @@ CORS(flask_app, resources={r"/*": {'origins': "*"}})
 
 import app.controller.router
 import app.controller.signup_controller
+import app.controller.games_controller
 import app.models
 import app.helpers

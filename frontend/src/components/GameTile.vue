@@ -10,7 +10,7 @@
       <div :class="{ 'image-holder-hover': hover, 'image-holder': !hover }">
         <img :src="this.img" alt="" />
         <p v-show="this.hover" class="subtitle1 title-container">
-          {{ this.name }}
+          {{ this.title }}
         </p>
       </div>
     </div>
@@ -22,10 +22,15 @@
         <p class="caption genre-container">
           {{ this.genre }}
         </p>
-        <div class="platform-container">
-          <div v-for="item in this.makePlatformList()" :key="item">
+        <div class="platform-container" v-if="this.makePlatformList() != ''">
+          <img
+            :src="this.getImageUrl(this.makePlatformList())"
+            alt="something"
+          />
+          <!-- <img :src="this.getImageUrl(this.makePlatformList())" :alt="item.alt" /> -->
+          <!-- <div v-for="item in this.makePlatformList()" :key="item">
             <img :src="this.getImageUrl(item)" :alt="item.alt" />
-          </div>
+          </div> -->
         </div>
       </div>
       <div v-show="this.showSection">
@@ -33,9 +38,10 @@
           {{ this.description }}
         </p>
         <div class="platform-container">
-          <div v-for="item in this.makePlatformList()" :key="item">
+          <!-- <img :src="this.getImageUrl()" :alt="item.alt" /> -->
+          <!-- <div v-for="item in this.makePlatformList()" :key="item">
             <img :src="this.getImageUrl(item)" :alt="item.alt" />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -44,12 +50,14 @@
 
 <script>
 export default {
+
   data() {
     return {
       hover: false,
       imgFromData: "https://www.freetogame.com/g/77/thumbnail.jpg",
     };
   },
+
   computed: {
     showSection() {
       return this.hover;
@@ -71,38 +79,41 @@ export default {
       window.open(urlStr);
     },
     makePlatformList() {
-      let arr = [];
-      for (let item in this.platform) {
-        switch (this.platform[item].toLowerCase()) {
-          case "pc":
-            arr.push("windows-line.svg");
-            break;
+      switch (this.platform) {
+        case "pc":
+          return "windows-line.svg";
+        // arr.push("windows-line.svg");
+        // break;
 
-          case "xbox":
-            arr.push("xbox-line.svg");
-            break;
+        case "xbox":
+          return "xbox-line.svg";
+        // arr.push("xbox-line.svg");
+        // break;
 
-          case "ps":
-            arr.push("playstation-line.svg");
-            break;
+        case "ps":
+          return "playstation-line.svg";
+        // arr.push("playstation-line.svg");
+        // break;
 
-          case "switch":
-            arr.push("switch-line.svg");
-            break;
+        case "switch":
+          return "switch-line.svg";
+        // arr.push("switch-line.svg");
+        // break;
 
-          default:
-            arr.push("windows-line.svg");
-            break;
-        }
+        case "browser":
+          return "globe-line.svg";
+
+        default:
+          return "";
+        // arr.push("windows-line.svg");
+        // break;
       }
-      return arr;
     },
   },
   props: {
-    name: {
+    title: {
       type: String,
-      default:
-        "Revelation Online",
+      default: "Revelation Online",
     },
     description: {
       type: String,
@@ -114,11 +125,11 @@ export default {
     },
     genre: {
       type: String,
-      default: "MMORPG",
+      default: "-",
     },
     platform: {
-      type: Array,
-      default: () => ["pc", "xbox"],
+      type: String,
+      default: "pc",
     },
     price: {
       type: String,
@@ -154,13 +165,13 @@ export default {
   position: absolute;
   bottom: 0px;
   left: 2px;
-  /*  */
+  /*  ---- overflow ---- */
   display: inline-block;
   width: calc(var(--tile-width) - 4px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  /*  */
+  /* ---- x ---- */
   z-index: 1;
   transition: var(--tile-transition-time);
 }
@@ -254,6 +265,7 @@ export default {
   padding-bottom: 4px;
   align-items: flex-end;
 }
+
 .platform-container img {
   height: 12px;
   width: 12px;

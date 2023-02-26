@@ -1,7 +1,7 @@
 from app import flask_app, session, request, jsonify, db, make_response, query
 from app.colored_print import Colors, DebugPrint
-from app.helpers import encode_password, went_wrong
-from app.models import User
+from app.helpers import went_wrong
+from app.models import User, Wishlist
 
 
 # <---- signup ----> #
@@ -18,9 +18,15 @@ def signup():
         matching_email = User.query.filter_by(email=_user.email).first()
 
         if ((matching_username == None) and (matching_email == None)):
+            # First create user
             res['message'] = 'success'
             res['status'] = 'none'
             db.session.add(_user)
+            db.session.commit()
+
+            # Based on user create a wishlist    
+            _wishlist = Wishlist(game_ids=None, user_id=_user.id);
+            db.session.add(_wishlist)
             db.session.commit()
             return _response
 

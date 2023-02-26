@@ -4,6 +4,7 @@ frontend/amazon_creds
 backend/gamejunx_env
 backend/app/__pycache__
 backend/app/controller/__pycache__
+backend/app/controller/secret.py
 /dist
 
 

@@ -3,7 +3,9 @@
     <AppHeader />
     <div class="app">
       <AppSidebar />
-      <router-view class="router-style" />
+      <div class="router-container-with-sidebar">
+        <router-view class="router-style" />
+      </div>
     </div>
   </div>
   <div v-else-if="!shouldShowSidebar">
@@ -23,9 +25,10 @@ export default {
   },
   data: () => ({}),
 
+
+
   created() {
-    
-    if (localStorage.getItem('token')!=null) {
+    if (localStorage.getItem("token") != null) {
       this.$router.push("home");
     }
   },
@@ -38,4 +41,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.router-container-with-sidebar {
+  
+  width: 88%;
+}
+.router-container {
+  width: 100%;
+}
+</style>
