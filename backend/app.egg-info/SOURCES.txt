@@ -9,3 +9,7 @@ app.egg-info/SOURCES.txt
 app.egg-info/dependency_links.txt
 app.egg-info/requires.txt
 app.egg-info/top_level.txt
+app/controller/games_controller.py
+app/controller/router.py
+app/controller/secret.py
+app/controller/signup_controller.py

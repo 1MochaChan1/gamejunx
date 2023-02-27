@@ -144,7 +144,7 @@ class Game(db.Model):
 
 
 class Wishlist(db.Model):
-    __tablename__ = "Wishlists"
+    __tablename__ = "wishlists"
     id = db.Column(db.Integer, primary_key=True)
     game_ids = db.Column(db.String(10000), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
