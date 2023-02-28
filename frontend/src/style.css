@@ -17,6 +17,8 @@
 
   --semantics-error-color: #ff7070;
   --semantics-success-color: #9eff95;
+  --semantics-error-dark-color: #ee4141;
+  --semantics-success-dark-color: #469b61;
 
   --shadow-tile: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -261,3 +263,21 @@ textarea {
     scroll-margin: 24px;
   }
 }
+
+/* transition classes */
+
+.toast-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.toast-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+/* ------- x ------- */
