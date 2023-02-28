@@ -1,5 +1,10 @@
 <template>
   <form @submit.prevent="this.login" method="POST">
+    <Transition name="toast">
+      <div v-if="this.showToast">
+        <AppToast :content="this.message" :success="this.success"/>
+      </div>
+    </Transition>
     <div class="container">
       <img src="../assets/images/login.jpg" alt="" />
       <div>
@@ -62,15 +67,25 @@ import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
 import AppButton from "../components/AppButton.vue";
 import { required, helpers } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import AppToast from "../components/AppToast.vue";
 export default {
   setup: () => ({
     v$: useVuelidate(),
   }),
 
+  // computed: {
+  //   getToastVal() {
+  //     return this.showToast;
+  //   },
+  // },
+
   data: () => ({
     rememberMe: true,
     username: "",
     password: "",
+    showToast: false,
+    success: false,
+    toastMessage: null,
   }),
 
   validations: () => ({
@@ -98,15 +113,27 @@ export default {
       let isValid = await this.v$.$validate();
 
       if (isValid) {
-        let response = await axios.post(this.baseUrl + "/login", {
-          username: this.username,
-          password: this.password,
-        });
+        let response = await axios
+          .post(this.baseUrl + "/login", {
+            username: this.username,
+            password: this.password,
+          })
+          .then(() => {})
+          .catch((e) => {
+
+            this.message = e.response.data.message;
+            this.success = (e.response.data.status != 'error')
+
+            console.log(this.message);
+            this.showToast = true;
+            setTimeout(() => (this.showToast = false), 2000);
+          });
 
         switch (response.status) {
           case 200:
             localStorage.setItem("token", response.data.token);
-            axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem('token');
+            axios.defaults.headers.common["Authorization"] =
+              "Bearer " + localStorage.getItem("token");
             this.$router.push("/home");
         }
       }
@@ -121,6 +148,7 @@ export default {
     AppTextFieldEdit,
     AppTextFieldPassword,
     AppButton,
+    AppToast,
   },
 };
 </script>

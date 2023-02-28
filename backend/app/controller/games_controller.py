@@ -44,7 +44,8 @@ def get_games():
         sale_games_json = json.loads(sale_games_decoded)
 
         for go in sale_games_json:
-            sale_price = 'free' if go['salePrice'][0] == "0" else f"$ {go['salePrice']}"
+            _sale_price_float = float(go['salePrice'])
+            sale_price = 'free' if _sale_price_float == 0.0 else f"$ {go['salePrice']}"
             base_price = f"$ {go['normalPrice']}"
             savings = f"$ {float(go['savings']):.2f}"
 
