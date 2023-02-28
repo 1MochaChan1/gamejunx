@@ -11,8 +11,8 @@ flask_app = Flask(__name__)
 flask_app.debug = True
 flask_app.config.from_object(__name__)
 flask_app.config['SECRET_KEY'] = 's7mbVzM_9FcL8gUd8Fc1'
-# flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/gamejunx_test'
-flask_app.config['SQLALCHEMY_DATABASE_URI'] = secret.aws_database_uri
+flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/gamejunx_test'
+# flask_app.config['SQLALCHEMY_DATABASE_URI'] = secret.aws_database_uri
 flask_app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 
 db = SQLAlchemy(flask_app)

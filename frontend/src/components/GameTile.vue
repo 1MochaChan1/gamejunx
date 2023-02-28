@@ -25,7 +25,7 @@
         <div class="platform-container" v-if="this.makePlatformList() != ''">
           <img
             :src="this.getImageUrl(this.makePlatformList())"
-            alt="something"
+            alt="img"
           />
           <!-- <img :src="this.getImageUrl(this.makePlatformList())" :alt="item.alt" /> -->
           <!-- <div v-for="item in this.makePlatformList()" :key="item">
@@ -34,7 +34,7 @@
         </div>
       </div>
       <div v-show="this.showSection">
-        <p class="caption">
+        <p class="body2">
           {{ this.description }}
         </p>
         <div class="platform-container">

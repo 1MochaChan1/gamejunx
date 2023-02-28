@@ -98,15 +98,21 @@ export default {
       let isValid = await this.v$.$validate();
 
       if (isValid) {
-        let response = await axios.post(this.baseUrl + "/login", {
-          username: this.username,
-          password: this.password,
-        });
+        let response = await axios
+          .post(this.baseUrl + "/login", {
+            username: this.username,
+            password: this.password,
+          })
+          .then(() => {})
+          .catch((e) => {
+            alert(e.response.data.message);
+          });
 
         switch (response.status) {
           case 200:
             localStorage.setItem("token", response.data.token);
-            axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem('token');
+            axios.defaults.headers.common["Authorization"] =
+              "Bearer " + localStorage.getItem("token");
             this.$router.push("/home");
         }
       }
