@@ -7,7 +7,7 @@ from app.models import User, Wishlist
 # <---- signup ----> #
 @flask_app.route('/signup', methods=['POST'])
 def signup():
-    res = {'status': 'success', 'message': 'none'}
+    res = {'status': 'success', 'message': 'User Successfully Created!'}
     _response = make_response(res)
     try:
         _json = request.get_json()
