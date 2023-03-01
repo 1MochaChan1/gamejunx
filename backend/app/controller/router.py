@@ -15,7 +15,7 @@ def token_page():
 @flask_app.route('/login', methods=['POST'])
 def login():
     #TODO: use this with make_response()
-    res = {'status': 'success', 'message': 'none'}
+    res = {'status': 'success', 'message': 'Login Successful!'}
     try:
         _json = request.get_json()
         _username_or_email = _json['username']

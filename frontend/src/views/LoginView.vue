@@ -2,7 +2,7 @@
   <form @submit.prevent="this.login" method="POST">
     <Transition name="toast">
       <div v-if="this.showToast">
-        <AppToast :content="this.message" :success="this.success"/>
+        <AppToast :content="this.message" :success="this.success" />
       </div>
     </Transition>
     <div class="container">
@@ -68,6 +68,7 @@ import AppButton from "../components/AppButton.vue";
 import { required, helpers } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import AppToast from "../components/AppToast.vue";
+import { delay } from "../global";
 export default {
   setup: () => ({
     v$: useVuelidate(),
@@ -113,33 +114,45 @@ export default {
       let isValid = await this.v$.$validate();
 
       if (isValid) {
-        let response = await axios
+        let response = null;
+        await axios
           .post(this.baseUrl + "/login", {
             username: this.username,
             password: this.password,
           })
-          .then(() => {})
+          .then((e) => {
+            this.showToastMessage(e.data.message, e.data.status);
+            response = e;
+          })
           .catch((e) => {
-
-            this.message = e.response.data.message;
-            this.success = (e.response.data.status != 'error')
-
-            console.log(this.message);
-            this.showToast = true;
-            setTimeout(() => (this.showToast = false), 2000);
+            this.showToastMessage(
+              e.response.data.message,
+              e.response.data.status
+            );
           });
 
-        switch (response.status) {
-          case 200:
-            localStorage.setItem("token", response.data.token);
-            axios.defaults.headers.common["Authorization"] =
-              "Bearer " + localStorage.getItem("token");
-            this.$router.push("/home");
+        await delay(2000);
+        if (response != null) {
+          switch (response.status) {
+            case 200: {
+              localStorage.setItem("token", response.data.token);
+              axios.defaults.headers.common["Authorization"] =
+                "Bearer " + localStorage.getItem("token");
+              this.$router.push("/home");
+            }
+          }
         }
       }
     },
     forgotPassword() {
       // console.log("Forgot password link pressed");
+    },
+    showToastMessage(msg, status) {
+      this.message = msg;
+      this.success = status != "error";
+
+      this.showToast = true;
+      setTimeout(() => (this.showToast = false), 3000);
     },
   },
 

@@ -1,5 +1,12 @@
 <template>
   <form @submit.prevent="this.signup" method="POST">
+    <Transition name="toast">
+      <AppToast
+        :content="this.toastMessage"
+        :success="this.success"
+        v-show="this.showToast"
+      />
+    </Transition>
     <div class="container">
       <img src="../assets/images/signup.jpg" alt="" />
       <div>
@@ -91,7 +98,9 @@ import AppLogo from "../components/AppLogo.vue";
 import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
 import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
 import AppButton from "../components/AppButton.vue";
+import AppToast from "../components/AppToast.vue";
 import axios from "axios";
+import { delay } from "../global";
 
 export default {
   name: "SignupView",
@@ -103,6 +112,9 @@ export default {
   }),
 
   data: () => ({
+    showToast: false,
+    toastMessage: null,
+    success: false,
     name: "",
     username: "",
     email: "",
@@ -140,6 +152,7 @@ export default {
     async signup() {
       let isValid = await this.v$.$validate();
       if (isValid) {
+        let response = null;
         await axios
           .post(this.baseUrl + "/signup", {
             name: this.name,
@@ -148,14 +161,32 @@ export default {
             password: this.formPassword.password,
           })
           .then((e) => {
-            if (e.data.status == "success") {
-              this.$router.push("login");
-            }
+            this.showToastMessage(e.data.message, e.data.status);
           })
           .catch((e) => {
-            alert(e.response.data.message);
+            this.showToastMessage(
+              e.response.data.message,
+              e.response.data.status
+            );
           });
+
+        await delay(2000);
+        if (response != null) {
+          switch (response.status) {
+            case 200: {
+              this.$router.push("login");
+            }
+          }
+        }
       }
+    },
+
+    showToastMessage(msg, status) {
+      this.toastMessage = msg;
+      this.success = status != "error";
+
+      this.showToast = true;
+      setTimeout(() => (this.showToast = false), 3000);
     },
   },
 
@@ -164,6 +195,7 @@ export default {
     AppTextFieldEdit,
     AppTextFieldPassword,
     AppButton,
+    AppToast,
   },
 };
 </script>
