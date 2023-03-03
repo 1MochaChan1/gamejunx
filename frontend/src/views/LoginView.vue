@@ -33,7 +33,7 @@
                 :showIcon="true"
               />
               <span v-if="v$.password.$error" class="error-message">{{
-                v$.username.$errors[0].$message
+                v$.password.$errors[0].$message
               }}</span>
             </div>
           </div>
