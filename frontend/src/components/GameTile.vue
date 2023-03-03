@@ -233,11 +233,10 @@ export default {
 .content-container {
   display: flex;
   flex-direction: column;
+  text-overflow:ellipsis;
   gap: 4px;
-  padding: 8px 4px;
-  width: 100%;
-  border-bottom-left-radius: var(--tile-rad-12);
-  border-bottom-right-radius: var(--tile-rad-12);
+  padding: 8px;
+  width: fit-content;
 }
 .price-tag-container {
   background-color: var(--primary-color);
