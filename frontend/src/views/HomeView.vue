@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <GameCarouselTile />
     <h3>Free</h3>
     <div class="horizontal-games-container">
       <div v-for="game in get_free_games" :key="game.index">
@@ -36,11 +37,13 @@
 import axios from "axios";
 import GameTile from "../components/GameTile.vue";
 import { APIEndpoints } from "../global";
+import GameCarouselTile from "../components/GameCarouselTile.vue";
 
 export default {
   name: "HomeView",
   components: {
     GameTile,
+    GameCarouselTile,
   },
 
   computed: {
@@ -55,11 +58,7 @@ export default {
   data: () => {
     return {
       free_games: [],
-      sale_games: []
-      // free_games:{
-      //   type:Array,
-      //   default: ()=>[]
-      // }
+      sale_games: [],
     };
   },
 

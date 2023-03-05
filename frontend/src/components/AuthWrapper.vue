@@ -43,8 +43,11 @@ export default {
 
 <style>
 .router-container-with-sidebar {
-  
-  width: 88%;
+  margin-left: 140px;
+  margin-top: 80px;
+  width: 100%;
+  height: 650px;
+  overflow-y: scroll;
 }
 .router-container {
   width: 100%;

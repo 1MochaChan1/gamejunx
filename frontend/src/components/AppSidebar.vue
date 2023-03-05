@@ -66,9 +66,11 @@ export default {
 }
 
 aside {
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 80px;
   height: 85vh;
   color: var(--neutral-unfocused-color);
   /* background-color: white; */
