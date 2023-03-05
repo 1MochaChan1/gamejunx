@@ -95,6 +95,7 @@ export default {
   background-color: var(--neutral-tile-color);
   overflow: hidden;
   border-radius: 24px;
+  scroll-snap-align: start;
 }
 
 .img-container {

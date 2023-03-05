@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <GameCarouselTile />
+    <GameCarouselSlider/>
     <h3>Free</h3>
     <div class="horizontal-games-container">
       <div v-for="game in get_free_games" :key="game.index">
@@ -15,7 +15,7 @@
         />
       </div>
     </div>
-    <div class="heightbox-container"></div>
+    <!-- <div class="heightbox-container"></div> -->
     <h3>On Sale</h3>
     <div class="horizontal-games-container">
       <div v-for="game in get_sale_games" :key="game.index">
@@ -37,13 +37,13 @@
 // import axios from "axios";
 import GameTile from "../components/GameTile.vue";
 // import { APIEndpoints } from "../global";
-import GameCarouselTile from "../components/GameCarouselTile.vue";
+import GameCarouselSlider from '../components/GameCarouselSlider.vue';
 
 export default {
   name: "HomeView",
   components: {
     GameTile,
-    GameCarouselTile,
+    GameCarouselSlider,
   },
 
   computed: {
@@ -297,14 +297,13 @@ export default {
 .heightbox-container {
   height: 8px;
   width: 0px;
-  /* margin-bottom: 80px; */
 }
 
 .container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 12px;
+  gap: 8px;
 }
 
 .textfield-parent {
