@@ -20,6 +20,6 @@ export default {
   display: flex;
   /* position: fixed; */
   gap: 24px;
-  padding: 0px 16px;
+  padding-left: 16px;
 }
 </style>

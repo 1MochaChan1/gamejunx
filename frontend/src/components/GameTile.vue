@@ -247,13 +247,7 @@ export default {
   flex-basis: min-content;
 }
 
-.genre-container {
-  background-color: var(--neutral-dark-color);
-  border-radius: 24px;
-  width: fit-content;
-  padding: 2px 8px;
-  flex-basis: min-content;
-}
+
 
 .platform-container {
   display: flex;
