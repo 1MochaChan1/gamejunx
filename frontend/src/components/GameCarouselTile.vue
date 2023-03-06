@@ -1,8 +1,8 @@
 <template>
-  <div class="tile-container">
+  <div class="tile-container" @click="this.openLink(this.link)">
     <div class="img-container">
-      <Transition name="game-image">
-        <img :src="this.getCurrentPicture" alt="" :key="this.currentImgIdx"/>
+      <Transition name="game-image" mode="in-out">
+        <img :src="this.getCurrentPicture" alt="" :key="this.currentImgIdx" />
       </Transition>
     </div>
     <div class="content-container">
@@ -11,13 +11,10 @@
         <p class="button1">MMO</p>
       </div>
       <p class="body2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.
+        {{ this.description }}
       </p>
-      <div class="image-carousel-container">
+      <div class="spacer"></div>
+      <div class="image-row-container">
         <div
           v-for="(url, index) in this.images"
           :key="(url.index, index.index)"
@@ -36,8 +33,6 @@ export default {
 
   computed: {
     getCurrentPicture() {
-      console.log(this.currentImgIdx);
-      console.log(this.images[this.currentImgIdx]);
       return this.images[this.currentImgIdx];
     },
   },
@@ -48,7 +43,7 @@ export default {
     };
   },
 
-  method: {
+  methods: {
     async cycleThroughImages(index) {
       let len = this.images.length();
       this.currentImgIdx = index;
@@ -58,9 +53,16 @@ export default {
 
       return this.currentImgIdx;
     },
+    openLink(urlStr) {
+      window.open(urlStr);
+    },
   },
 
   props: {
+    link: {
+      type: String,
+      default: "",
+    },
     title: {
       type: String,
       default: "Dark Souls: Remastered",
@@ -75,12 +77,7 @@ export default {
     },
     images: {
       type: Array,
-      default: () => [
-        "https://cdn.akamai.steamstatic.com/steam/apps/570940/capsule_616x353.jpg?t=1668145065",
-        "https://fs-prod-cdn.nintendo-europe.com/media/images/08_content_images/games_6/nintendo_switch_7/nswitch_darksouls/CI_NSwitch_DarkSoulsRemastered_phantom04.jpg",
-        "https://live.mrf.io/statics/i/ps/www.muycomputer.com/wp-content/uploads/2018/01/Dark-Souls-Remastered.jpg?width=1200&enable=upscale",
-        "https://win.gg/wp-content/uploads/2021/08/streamer-flawlessly-beats-dark-souls-boss-blindfolded-on-a-piano.jpg",
-      ],
+      default: () => [],
     },
   },
 };
@@ -88,6 +85,7 @@ export default {
 
 <style scoped>
 .tile-container {
+  cursor: pointer;
   display: flex;
   width: 1016px;
   height: 280px;
@@ -106,34 +104,39 @@ export default {
   /* animation: anim 200ms; */
 }
 
-@keyframes anim{
-  from{
+.img-container img {
+  object-fit: cover;
+}
+
+@keyframes anim {
+  from {
     opacity: 0;
   }
-  to{
+  to {
     opacity: 1;
   }
 }
 
-.image-carousel-container {
+.image-row-container {
   display: flex;
   gap: 4px;
 }
 
-.image-carousel-container img:hover {
+.image-row-container img:hover {
   cursor: pointer;
-  width: 124px;
-  height: 100px;
+  width: 120px;
+  height: 90px;
   transition: var(--tile-transition-time);
 }
 
-.image-carousel-container img {
+.image-row-container img {
   cursor: pointer;
   object-fit: cover;
-  width: 120px;
-  height: 96px;
+  width: 116px;
+  height: 90px;
   transition: var(--tile-transition-time);
   border-radius: 8px;
+  margin-bottom: 24px;
 }
 
 .genre-container {
@@ -153,6 +156,7 @@ img {
   width: 100%;
   height: 100%;
   padding: 16px 16px;
+  justify-content: space-between;
   gap: 8px;
 }
 

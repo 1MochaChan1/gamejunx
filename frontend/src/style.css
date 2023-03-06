@@ -8,6 +8,7 @@
   --secondary-dark-color: #00d6f3;
 
   --neutral-background-color: #161616;
+
   /* --neutral-background-color: #1b1b1b; */
   --neutral-tile-color: #101010;
   --neutral-text-icon-color: #ffffff;
@@ -44,6 +45,8 @@
   /* Time */
   --tile-transition-time: 200ms;
 }
+
+
 
 h1 {
   font-family: var(--font-family);
