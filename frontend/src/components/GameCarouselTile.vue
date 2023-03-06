@@ -19,7 +19,7 @@
           v-for="(url, index) in this.images"
           :key="(url.index, index.index)"
         >
-          <img :src="url" alt="" @click="this.currentImgIdx = index" />
+          <img :src="url" alt="" @click.stop="this.currentImgIdx = index" />
         </div>
       </div>
     </div>
@@ -101,6 +101,7 @@ export default {
   width: 100%;
   height: 100%;
   transition: var(--tile-transition-time);
+  
   /* animation: anim 200ms; */
 }
 
@@ -120,6 +121,7 @@ export default {
 .image-row-container {
   display: flex;
   gap: 4px;
+  z-index: 1;
 }
 
 .image-row-container img:hover {
