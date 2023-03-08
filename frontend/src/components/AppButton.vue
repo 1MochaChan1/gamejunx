@@ -12,7 +12,7 @@ export default {
   props:{
     label:{
       type:String
-    }
+    },
   },
   methods: {
     onClick() {

@@ -8,7 +8,7 @@
     <div class="content-container">
       <h1>{{ this.title }}</h1>
       <div class="genre-container">
-        <p class="button1">MMO</p>
+        <p class="button1">{{this.category}}</p>
       </div>
       <p class="body2">
         {{ this.description }}
