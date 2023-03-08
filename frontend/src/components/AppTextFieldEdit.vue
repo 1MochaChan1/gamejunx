@@ -1,5 +1,6 @@
 <template>
   <div class="parent">
+    <p class="subtitle2" :v-if="this.label">{{this.label}}</p>
     <input
       class="custom-textfield"
       type="text"

@@ -199,7 +199,11 @@ export default {
   },
 };
 </script>
-
+<style>
+body {
+  overflow: hidden;
+}
+</style>
 <style scoped>
 .container {
   display: flex;

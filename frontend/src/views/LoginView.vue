@@ -16,7 +16,7 @@
           </div>
           <div class="textfield-container">
             <div>
-              <AppTextFieldEdit
+              <AppTextField
                 class="no-icon-field"
                 v-model="username"
                 :hint="'Username or Email'"
@@ -62,7 +62,8 @@
 <script>
 import axios from "axios";
 import AppLogo from "../components/AppLogo.vue";
-import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
+// import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
+import AppTextField from "../components/AppTextField.vue";
 import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
 import AppButton from "../components/AppButton.vue";
 import { required, helpers } from "@vuelidate/validators";
@@ -158,7 +159,7 @@ export default {
 
   components: {
     AppLogo,
-    AppTextFieldEdit,
+    AppTextField,
     AppTextFieldPassword,
     AppButton,
     AppToast,
@@ -166,7 +167,16 @@ export default {
 };
 </script>
 
+<style>
+body{
+  overflow: hidden !important;
+}
+</style>
+
 <style scoped>
+
+
+
 .container {
   display: flex;
   gap: 16px;

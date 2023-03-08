@@ -4,22 +4,27 @@
       class="custom-textfield"
       type="text"
       :placeholder="hint"
-      v-model="value"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
-    <div class="textfield-icon" @click="edit()">
-    </div>
+    <!-- <div class="textfield-icon" @click="edit()">
+    </div> -->
   </div>
 </template>
 
 <script>
 export default {
   name: "AppTextField",
-  data() {
-    return {
-      value: "",
-    };
+  emits: ["update:modelValue"],
+  props: {
+    modelValue: {},
+    hint: {
+      type: String,
+    },
+    label: {
+      type: String,
+    },
   },
-  props: ["hint"],
 };
 </script>
 
