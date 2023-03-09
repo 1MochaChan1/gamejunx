@@ -129,7 +129,6 @@ p.button1 {
 
 p.button2 {
   font-family: var(--font-family);
-
   font-weight: var(--font-weight-medium);
   font-size: 12px;
 }

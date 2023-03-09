@@ -34,7 +34,7 @@ export default {
       default:null
     },
   },
-  
+
   methods: {
     edit() {
       this.$emit("edit");
@@ -51,6 +51,7 @@ export default {
 }
 
 .field-container {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -58,6 +59,9 @@ export default {
 }
 
 .textfield-icon {
+  right: 8px;
+  bottom: 5px;
+  position: absolute;
   cursor: pointer;
 }
 </style>

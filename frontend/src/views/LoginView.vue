@@ -75,12 +75,6 @@ export default {
     v$: useVuelidate(),
   }),
 
-  // computed: {
-  //   getToastVal() {
-  //     return this.showToast;
-  //   },
-  // },
-
   data: () => ({
     rememberMe: true,
     username: "",
@@ -136,7 +130,7 @@ export default {
         if (response != null) {
           switch (response.status) {
             case 200: {
-              localStorage.setItem("token", response.data.token);
+              this.populateStorage(response.data);
               axios.defaults.headers.common["Authorization"] =
                 "Bearer " + localStorage.getItem("token");
               this.$router.push("/home");
@@ -147,6 +141,13 @@ export default {
     },
     forgotPassword() {
       // console.log("Forgot password link pressed");
+    },
+    populateStorage(data){
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("id", data.user.id);
+      localStorage.setItem("name", data.user.name);
+      localStorage.setItem("username", data.user.username);
+      localStorage.setItem("email", data.user.email);
     },
     showToastMessage(msg, status) {
       this.message = msg;
