@@ -1,4 +1,4 @@
-from app import flask_app, session, request, jsonify, db, make_response, query
+from app import flask_app, request, db, make_response
 from app.colored_print import Colors, DebugPrint
 from app.helpers import went_wrong
 from app.models import User, Wishlist
@@ -48,7 +48,7 @@ def signup():
 
         return _response
     except Exception as e:
-        went_wrong(e)
+        return went_wrong(e)
 
 
 # <---- email - verificaiton ----> #
@@ -77,7 +77,7 @@ def verify_email():
         return response
 
     except Exception as e:
-        went_wrong(e)
+        return went_wrong(e)
 
 
 # <---- username - verfication ----> #
@@ -104,4 +104,4 @@ def verify_username():
 
         return response
     except Exception as e:
-        went_wrong(e)
+        return went_wrong(e)

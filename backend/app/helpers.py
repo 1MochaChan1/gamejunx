@@ -35,7 +35,7 @@ def token_required(func):
             jwt.decode(token, flask_app.config['SECRET_KEY'],algorithms=['HS256'])
             return(func(*args, **kwargs))
         except Exception as e:
-            DebugPrint(e)
+            went_wrong(e)
             return jsonify({"error":"Invalid Token"}), 498
     return decorated
 
