@@ -42,4 +42,4 @@ def token_required(func):
 def went_wrong(e:Exception):
     DebugPrint(e, color=Colors.red, end='\n------------------------\n')
     DebugPrint(''.join(traceback.TracebackException.from_exception(e).format()), color=Colors.error)
-    return jsonify({"error":"Something went wrong"}),500
+    return jsonify({"message":"Something went wrong", "status":"error"}),500
