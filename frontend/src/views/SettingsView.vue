@@ -242,6 +242,8 @@ export default {
       this.v$.passwords.old_password.$touch();
       this.v$.passwords.new_password.$touch();
       this.v$.passwords.confirmed_password.$touch();
+
+      
     },
 
     populateStorage(data) {
