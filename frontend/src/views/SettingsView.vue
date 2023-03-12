@@ -9,7 +9,9 @@
             label="Display Name"
             class="field-width"
           />
-          <span class="error-message" v-if="v$.name.$error"> something </span>
+          <span class="error-message" v-if="v$.name.$error">
+            {{ this.v$.name.$errors[0].$message }}
+          </span>
         </div>
         <div class="field-row">
           <div>
@@ -23,11 +25,16 @@
               {{ this.v$.username.$errors[0].$message }}
             </span>
           </div>
-          <AppTextFieldEdit
-            v-model="this.email"
-            label="Email"
-            class="field-width"
-          />
+          <div>
+            <AppTextFieldEdit
+              v-model="this.email"
+              label="Email"
+              class="field-width"
+            />
+            <span class="error-message" v-if="v$.email.$error">
+              {{ this.v$.email.$errors[0].$message }}
+            </span>
+          </div>
         </div>
         <AppButton
           label="Save Changes"
@@ -37,25 +44,51 @@
         <br />
         <h6>Change Password</h6>
         <div class="field-row">
-          <AppTextFieldEdit
-            label="Old Password"
-            hint="•••••••••"
-            class="field-width"
-          />
+          <div>
+            <AppTextFieldPassword
+              v-model="this.passwords.old_password"
+              label="Old Password"
+              hint="•••••••••"
+              class="field-width"
+            />
+            <span
+              class="error-message"
+              v-if="v$.passwords.old_password.$error"
+              >{{ this.v$.passwords.old_password.$errors[0].$message }}</span
+            >
+          </div>
           <p class="link1">Forgot Password?</p>
         </div>
 
         <div class="field-row">
-          <AppTextFieldEdit
-            label="New Password"
-            hint="•••••••••"
-            class="field-width"
-          />
-          <AppTextFieldEdit
-            label="Confirm Password"
-            hint="•••••••••"
-            class="field-width"
-          />
+          <div>
+            <AppTextFieldPassword
+              v-model="this.passwords.new_password"
+              label="New Password"
+              hint="•••••••••"
+              class="field-width"
+            />
+            <span
+              class="error-message"
+              v-if="v$.passwords.new_password.$error"
+              >{{ this.v$.passwords.new_password.$errors[0].$message }}</span
+            >
+          </div>
+          <div>
+            <AppTextFieldPassword
+              v-model="this.passwords.confirmed_password"
+              label="Confirm Password"
+              hint="•••••••••"
+              class="field-width"
+            />
+            <span
+              class="error-message"
+              v-if="v$.passwords.confirmed_password.$error"
+              >{{
+                this.v$.passwords.confirmed_password.$errors[0].$message
+              }}</span
+            >
+          </div>
         </div>
         <AppButton
           label="Save Changes"
@@ -76,12 +109,14 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, email, helpers } from "@vuelidate/validators";
+import { required, email, minLength, helpers } from "@vuelidate/validators";
 import AppButton from "../components/AppButton.vue";
 import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
-import { delay, titalize } from "../global";
+import { APIEndpoints, titalize } from "../global";
+import axios from "axios";
+import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
 export default {
-  components: { AppTextFieldEdit, AppButton },
+  components: { AppTextFieldEdit, AppButton, AppTextFieldPassword },
   name: "SettingsView",
 
   setup() {
@@ -92,20 +127,57 @@ export default {
     this.name = titalize(this.name);
   },
 
+  computed: {
+    getUsernameErrorStatus() {
+      return this.async_errors.is_username_unique;
+    },
+    getEmailErrorStatus() {
+      return this.async_errors.is_email_unique;
+    },
+    getPasswordErrorStatus() {
+      return this.async_errors.is_password_valid;
+    },
+  },
+
   validations() {
     return {
-      name: { required },
+      name: {
+        required: helpers.withMessage("Display name can't be empty", required),
+      },
       username: {
         required,
-        unique: helpers.withMessage("Username is already taken", function () {
-          return this.async_errors.is_username_unique;
-        }),
+        unique: helpers.withMessage(
+          "Username is already taken",
+          () => this.getUsernameErrorStatus
+        ),
       },
-      email: { required, email },
+      email: {
+        required,
+        email,
+        unique: helpers.withMessage(
+          "Email is already taken",
+          () => this.getEmailErrorStatus
+        ),
+      },
       passwords: {
-        old_password: { required },
-        new_password: { required },
-        confirmed_password: { required },
+        old_password: {
+          required: helpers.withMessage("Old password is required.", required),
+          valid: helpers.withMessage(
+            "Given password doesn't match",
+            () => this.getPasswordErrorStatus
+          ),
+        },
+        new_password: {
+          required: helpers.withMessage("New password is required.", required),
+          minLength: minLength(8),
+        },
+        confirmed_password: {
+          required,
+          match: helpers.withMessage(
+            "The password does not match",
+            () => this.passwords.new_password === this.passwords.old_password
+          ),
+        },
       },
     };
   },
@@ -125,39 +197,58 @@ export default {
       async_errors: {
         is_username_unique: true,
         is_email_unique: true,
-        is_password_unique: true,
+        is_password_valid: true,
       },
     };
   },
 
   methods: {
-    edited() {
-      //   console.log("edit called");
-    },
-
-    uniqueUsernameError() {
-      return;
-    },
-
     async saveNameChanged() {
       this.v$.name.$touch();
       this.v$.username.$touch();
       this.v$.email.$touch();
 
-      await delay(2000);
       // if response.status === error =---- then -> async_errors.is_username_unique = response.error
       // else _username.error = ''
-      if (this.username === "leinadd") {
-        this.async_errors.is_username_unique = false;
-      }else{
-        this.async_errors.is_username_unique = true;
+      let data = null;
+      await axios
+        .put(this.baseUrl + APIEndpoints.basic_user_details, {
+          id: localStorage.id,
+          name: this.name,
+          username: this.username,
+          email: this.email,
+        })
+        .then((res) => {
+          data = res.data;
+        })
+        .catch((res) => {
+          data = res.response.data;
+        });
+      console.log(data);
+      if (data.status === "error") {
+        if (data.message.toLowerCase().includes("username")) {
+          this.async_errors.is_username_unique = false;
+          await this.v$.username.$touch();
+        } else if (data.message.toLowerCase().includes("email")) {
+          this.async_errors.is_email_unique = false;
+          await this.v$.email.$touch();
+        }
+      } else {
+        this.populateStorage(data);
       }
-      await this.v$.username.$touch();
     },
+
     savePasswordChanged() {
       this.v$.passwords.old_password.$touch();
       this.v$.passwords.new_password.$touch();
       this.v$.passwords.confirmed_password.$touch();
+    },
+
+    populateStorage(data) {
+      localStorage.setItem("id", data.user.id);
+      localStorage.setItem("name", data.user.name);
+      localStorage.setItem("username", data.user.username);
+      localStorage.setItem("email", data.user.email);
     },
   },
 };

@@ -5,6 +5,7 @@ export class APIEndpoints {
   static login = "login";
   static signup = "signup";
   static get_games = "get-games";
+  static basic_user_details = "user-details/basic"
 }
 
 export function delay(ms) {
