@@ -15,7 +15,8 @@
         />
       </div>
     </div>
-    <!-- <div class="heightbox-container"></div> -->
+
+    <div class="heightbox-container" style="height:16px"></div>
     <h3>On Sale</h3>
     <div class="horizontal-games-container">
       <div v-for="game in get_sale_games" :key="game.index">
@@ -30,6 +31,7 @@
         />
       </div>
     </div>
+    <div class="heightbox-container"></div>
   </div>
 </template>
 
@@ -280,10 +282,7 @@ export default {
 
 <style scoped>
 .horizontal-games-container {
-  height: 230px;
-  /* display: grid; */
   display: flex;
-  /* grid-auto-flow: column; */
   gap: 16px;
   padding: 8px;
   overscroll-behavior-inline: contain;
@@ -295,7 +294,7 @@ export default {
 }
 
 .heightbox-container {
-  height: 8px;
+  height: 50px;
   width: 0px;
 }
 

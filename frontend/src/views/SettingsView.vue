@@ -137,6 +137,9 @@ export default {
     getPasswordErrorStatus() {
       return this.async_errors.is_password_valid;
     },
+    getPasswordMatchStatus() {
+      return this.passwords.new_password === this.passwords.confirmed_password;
+    },
   },
 
   validations() {
@@ -175,7 +178,7 @@ export default {
           required,
           match: helpers.withMessage(
             "The password does not match",
-            () => this.passwords.new_password === this.passwords.old_password
+            () => this.getPasswordMatchStatus
           ),
         },
       },
@@ -224,26 +227,43 @@ export default {
         .catch((res) => {
           data = res.response.data;
         });
-      console.log(data);
-      if (data.status === "error") {
-        if (data.message.toLowerCase().includes("username")) {
-          this.async_errors.is_username_unique = false;
-          await this.v$.username.$touch();
-        } else if (data.message.toLowerCase().includes("email")) {
-          this.async_errors.is_email_unique = false;
-          await this.v$.email.$touch();
-        }
-      } else {
+
+      this.async_errors.is_username_unique = !data.message
+        .toLowerCase()
+        .includes("username");
+      await this.v$.username.$touch();
+
+      this.async_errors.is_email_unique = !data.message
+        .toLowerCase()
+        .includes("email");
+      await this.v$.email.$touch();
+
+      if (!(data.status === "error")) {
         this.populateStorage(data);
       }
     },
 
-    savePasswordChanged() {
+    async savePasswordChanged() {
       this.v$.passwords.old_password.$touch();
       this.v$.passwords.new_password.$touch();
       this.v$.passwords.confirmed_password.$touch();
 
-      
+      let data = null;
+      await axios
+        .put(this.baseUrl + APIEndpoints.change_user_password, {
+          id: localStorage.id,
+          old_password: this.passwords.old_password,
+          new_password: this.passwords.new_password,
+        })
+        .then((res) => {
+          data = res.data;
+        })
+        .catch((res) => (data = res.response.data));
+
+      this.async_errors.is_password_valid = !data.message
+        .toLowerCase()
+        .includes("old password");
+      await this.v$.passwords.old_password.$touch();
     },
 
     populateStorage(data) {
