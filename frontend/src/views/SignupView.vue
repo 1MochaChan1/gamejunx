@@ -219,7 +219,7 @@ body {
 }
 
 .no-icon-field {
-  width: calc(var(--textfield-width) - 25px);
+  width: var(--textfield-width);
 }
 
 .login-wrapper {

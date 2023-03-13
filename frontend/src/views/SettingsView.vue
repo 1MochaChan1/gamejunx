@@ -1,5 +1,5 @@
 <template>
-  <div class="parent-container">
+  <div class="page-parent-container">
     <div class="account-settings-container">
       <h2>Account Settings</h2>
       <div class="fields-container">
@@ -288,12 +288,7 @@ h6 {
   margin-top: 36px;
 }
 
-.parent-container {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding-left: 4px;
-}
+
 
 .account-settings-container {
   display: flex;
