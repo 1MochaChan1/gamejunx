@@ -3,6 +3,7 @@ from app.models import User
 from app.helpers import encode_password, token_required, went_wrong
 from app.colored_print import DebugPrint, Colors
 import jwt
+ 
 
 # <---- test ----> #
 @flask_app.route('/test', methods=['GET'])
@@ -44,4 +45,10 @@ def login():
 
     except Exception as e:
         return went_wrong(e)
+
+
+# <---- steam ----> #
+@flask_app.route('/link-library/steam', methods=['GET'])
+def steamlogin():
+    return "Lund kuch nahi hai idhar"
 
