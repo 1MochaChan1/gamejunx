@@ -7,11 +7,6 @@
           <div><p>Home</p></div>
         </router-link>
 
-        <!-- <router-link class="sidebar-button body1" to="/wishlist">
-          <span><fa-icon icon="heart" /></span>
-          <div><p>Wishlist</p></div>
-        </router-link> -->
-
         <router-link class="sidebar-button body1" to="/games">
           <span><fa-icon icon="tag" /></span>
           <div><p>Games</p></div>
@@ -66,9 +61,11 @@ export default {
 }
 
 aside {
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 80px;
   height: 85vh;
   color: var(--neutral-unfocused-color);
   /* background-color: white; */

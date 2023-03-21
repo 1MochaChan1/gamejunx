@@ -19,30 +19,18 @@
         {{ this.price }}
       </p>
       <div v-show="!this.showSection">
-        <p class="caption genre-container">
+        <p class="genre-container">
           {{ this.genre }}
         </p>
         <div class="platform-container" v-if="this.makePlatformList() != ''">
-          <img
-            :src="this.getImageUrl(this.makePlatformList())"
-            alt="img"
-          />
-          <!-- <img :src="this.getImageUrl(this.makePlatformList())" :alt="item.alt" /> -->
-          <!-- <div v-for="item in this.makePlatformList()" :key="item">
-            <img :src="this.getImageUrl(item)" :alt="item.alt" />
-          </div> -->
+          <img :src="this.getImageUrl(this.makePlatformList())" alt="img" />
         </div>
       </div>
       <div v-show="this.showSection">
         <p class="body2">
           {{ this.description }}
         </p>
-        <div class="platform-container">
-          <!-- <img :src="this.getImageUrl()" :alt="item.alt" /> -->
-          <!-- <div v-for="item in this.makePlatformList()" :key="item">
-            <img :src="this.getImageUrl(item)" :alt="item.alt" />
-          </div> -->
-        </div>
+        <div class="platform-container"></div>
       </div>
     </div>
   </div>
@@ -50,7 +38,6 @@
 
 <script>
 export default {
-
   data() {
     return {
       hover: false,
@@ -148,6 +135,10 @@ export default {
 </script>
 
 <style scoped>
+p {
+  margin: var(--text-mg-2);
+}
+
 .tile-container {
   cursor: pointer;
   display: flex;
@@ -233,7 +224,7 @@ export default {
 .content-container {
   display: flex;
   flex-direction: column;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   gap: 4px;
   padding: 8px;
   width: fit-content;
@@ -244,14 +235,6 @@ export default {
   padding: 0px 4px;
   height: fit-content;
   width: fit-content;
-  flex-basis: min-content;
-}
-
-.genre-container {
-  background-color: var(--neutral-dark-color);
-  border-radius: 24px;
-  width: fit-content;
-  padding: 2px 8px;
   flex-basis: min-content;
 }
 

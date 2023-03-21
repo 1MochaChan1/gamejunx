@@ -18,7 +18,7 @@
           </div>
           <div class="textfield-container">
             <div>
-              <AppTextFieldEdit
+              <AppTextField
                 class="no-icon-field"
                 v-model="name"
                 :hint="'Name'"
@@ -28,7 +28,7 @@
               }}</span>
             </div>
             <div>
-              <AppTextFieldEdit
+              <AppTextField
                 class="no-icon-field"
                 v-model="username"
                 :hint="'Username'"
@@ -38,7 +38,7 @@
               }}</span>
             </div>
             <div>
-              <AppTextFieldEdit
+              <AppTextField
                 class="no-icon-field"
                 v-model="email"
                 :hint="'Email'"
@@ -95,7 +95,7 @@
 import useVuedilate from "@vuelidate/core";
 import { required, email, minLength, helpers } from "@vuelidate/validators";
 import AppLogo from "../components/AppLogo.vue";
-import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
+import AppTextField from "../components/AppTextField.vue";
 import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
 import AppButton from "../components/AppButton.vue";
 import AppToast from "../components/AppToast.vue";
@@ -192,14 +192,18 @@ export default {
 
   components: {
     AppLogo,
-    AppTextFieldEdit,
+    AppTextField,
     AppTextFieldPassword,
     AppButton,
     AppToast,
   },
 };
 </script>
-
+<style>
+body {
+  overflow: hidden;
+}
+</style>
 <style scoped>
 .container {
   display: flex;
@@ -215,7 +219,7 @@ export default {
 }
 
 .no-icon-field {
-  width: calc(var(--textfield-width) - 25px);
+  width: var(--textfield-width);
 }
 
 .login-wrapper {

@@ -8,6 +8,7 @@
   --secondary-dark-color: #00d6f3;
 
   --neutral-background-color: #161616;
+
   /* --neutral-background-color: #1b1b1b; */
   --neutral-tile-color: #101010;
   --neutral-text-icon-color: #ffffff;
@@ -54,7 +55,7 @@ h1 {
 
 h2 {
   font-family: var(--font-family);
-
+margin: 0px;
   font-weight: var(--font-weight-medium);
   font-size: 28px;
 }
@@ -82,7 +83,7 @@ h5 {
 
 h6 {
   font-family: var(--font-family);
-
+  margin: 0px;
   font-weight: var(--font-weight-semi-bold);
   font-size: 16px;
 }
@@ -128,7 +129,6 @@ p.button1 {
 
 p.button2 {
   font-family: var(--font-family);
-
   font-weight: var(--font-weight-medium);
   font-size: 12px;
 }
@@ -190,11 +190,11 @@ input[type="checkbox"] {
   cursor: pointer;
   height: fit-content;
   border-radius: 12px;
+  border: none;
   width: 100%;
   height: 34px;
   padding: 2px;
   background-color: var(--secondary-color);
-  border-radius: ra;
 }
 .button:hover {
   background-color: var(--secondary-dark-color);
@@ -233,6 +233,23 @@ textarea {
   font-size: 14px;
 }
 
+.genre-container {
+  background-color: var(--neutral-dark-color);
+  border-radius: 24px;
+  width: fit-content;
+  padding: 2px 8px;
+  flex-basis: min-content;
+}
+
+.page-parent-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-left: 4px;
+}
+
+/* Scrollbar Classes */
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -264,7 +281,7 @@ textarea {
   }
 }
 
-/* transition classes */
+/* Transition Classes */
 
 .toast-enter-active {
   transition: all 0.3s ease-out;
@@ -276,7 +293,19 @@ textarea {
 
 .toast-enter-from,
 .toast-leave-to {
-  transform: translateY(-20px);
+  /* transform: translateY(-20px); */
+  transform: translateX(120px);
+  opacity: 0;
+}
+
+
+.game-image-enter-active,
+.game-image-leave-active{
+  transition: all var(--tile-transition-time) ease;
+}
+
+.game-image-enter-from,
+.game-image-leave-to {
   opacity: 0;
 }
 

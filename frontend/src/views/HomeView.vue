@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <GameCarouselSlider/>
     <h3>Free</h3>
     <div class="horizontal-games-container">
       <div v-for="game in get_free_games" :key="game.index">
@@ -14,7 +15,8 @@
         />
       </div>
     </div>
-    <div class="heightbox-container"></div>
+
+    <div class="heightbox-container" style="height:16px"></div>
     <h3>On Sale</h3>
     <div class="horizontal-games-container">
       <div v-for="game in get_sale_games" :key="game.index">
@@ -29,18 +31,21 @@
         />
       </div>
     </div>
+    <div class="heightbox-container"></div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import GameTile from "../components/GameTile.vue";
-import { APIEndpoints } from "../global";
+// import { APIEndpoints } from "../global";
+import GameCarouselSlider from '../components/GameCarouselSlider.vue';
 
 export default {
   name: "HomeView",
   components: {
     GameTile,
+    GameCarouselSlider,
   },
 
   computed: {
@@ -54,26 +59,215 @@ export default {
 
   data: () => {
     return {
-      free_games: [],
-      sale_games: []
-      // free_games:{
-      //   type:Array,
-      //   default: ()=>[]
-      // }
+      free_games: [
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+      ],
+      sale_games: [
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+        {
+          description:
+            "A hero-focused first-person team shooter from Blizzard Entertainment.",
+          genre: "Shooter",
+          id: null,
+          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
+          link: "https://www.freetogame.com/overwatch-2",
+          platform: "pc",
+          price: "free",
+          tags: null,
+          title: "Overwatch 2",
+        },
+      ],
     };
   },
 
   methods: {
     async getData() {
-      await axios
-        .get(this.baseUrl + APIEndpoints.get_games)
-        .then((res) => {
-          console.log(res);
-          this.free_games = res.data.free_games;
-          this.sale_games = res.data.sale_games;
-        })
-        .catch((e) => console.log(e));
-
+      // await axios
+      //   .get(this.baseUrl + APIEndpoints.get_games)
+      //   .then((res) => {
+      //     console.log(res);
+      //     this.free_games = res.data.free_games;
+      //     this.sale_games = res.data.sale_games;
+      //   })
+      //   .catch(() => {});
       // if (res.status == 200) {
       //   console.log(res.data);
       //   this.free_games = res.data.free_games;
@@ -88,9 +282,7 @@ export default {
 
 <style scoped>
 .horizontal-games-container {
-  height: 230px;
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
   gap: 16px;
   padding: 8px;
   overscroll-behavior-inline: contain;
@@ -102,16 +294,15 @@ export default {
 }
 
 .heightbox-container {
-  height: 8px;
+  height: 50px;
   width: 0px;
-  /* margin-bottom: 80px; */
 }
 
 .container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 12px;
+  gap: 8px;
 }
 
 .textfield-parent {

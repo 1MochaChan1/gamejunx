@@ -16,6 +16,7 @@ export default {
 
 
 .app-header {
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;

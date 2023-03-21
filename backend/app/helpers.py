@@ -35,11 +35,11 @@ def token_required(func):
             jwt.decode(token, flask_app.config['SECRET_KEY'],algorithms=['HS256'])
             return(func(*args, **kwargs))
         except Exception as e:
-            DebugPrint(e)
+            went_wrong(e)
             return jsonify({"error":"Invalid Token"}), 498
     return decorated
 
 def went_wrong(e:Exception):
     DebugPrint(e, color=Colors.red, end='\n------------------------\n')
     DebugPrint(''.join(traceback.TracebackException.from_exception(e).format()), color=Colors.error)
-    return jsonify({"error":"Something went wrong"}),500
+    return jsonify({"message":"Something went wrong", "status":"error"}),500
