@@ -22,41 +22,50 @@ def get_games():
     sale_games: list[Game] = []
     res = {'status': 'success', 'message': 'none'}
     try:
-        # Calling free games API
-        free_games_res = free_games_http.request(
-            'GET', free_games_base_url + "/games")
-        free_games_decoded = free_games_res.data.decode('utf-8')
-        free_games_json = json.loads(free_games_decoded)
+        all_games = Game.query.all()
 
-        for go in free_games_json:
-            _platform = get_platform(go['platform'])
-            # will remove this code block in future, it's here for testing
-            _game = Game(title=go['title'], description=go['short_description'],
-                         tags=None, genre=go['genre'], platform=_platform,
-                         price='free', img=go['thumbnail'],
-                         link=go['freetogame_profile_url'])
-            free_games.append(_game.toMap())
+        for game in all_games:
+            if(game.price!="free"):
+                sale_games.append(game.toMap())
+            else:
+                free_games.append(game.toMap())
+
+        # Calling free games API
+        # free_games_res = free_games_http.request(
+        #     'GET', free_games_base_url + "/games")
+        # free_games_decoded = free_games_res.data.decode('utf-8')
+        # free_games_json = json.loads(free_games_decoded)
+
+        # for go in free_games_json:
+        #     _platform = get_platform(go['platform'])
+        #     # will remove this code block in future, it's here for testing
+        #     _game = Game(title=go['title'], description=go['short_description'],
+        #                  tags=None, genre=go['genre'], platform=_platform,
+        #                  price='free', img=go['thumbnail'],
+        #                  link=go['freetogame_profile_url'])
+        #     free_games.append(_game.toMap())
+
 
         # Calling sales games API
-        sale_games_res = sale_games_http.request(
-            'GET', sale_games_base_url+"/deals")
-        sale_games_decoded = sale_games_res.data.decode('utf-8')
-        sale_games_json = json.loads(sale_games_decoded)
+        # sale_games_res = sale_games_http.request(
+        #     'GET', sale_games_base_url+"/deals")
+        # sale_games_decoded = sale_games_res.data.decode('utf-8')
+        # sale_games_json = json.loads(sale_games_decoded)
 
-        for go in sale_games_json:
-            _sale_price_float = float(go['salePrice'])
-            sale_price = 'free' if _sale_price_float == 0.0 else f"$ {go['salePrice']}"
-            base_price = f"$ {go['normalPrice']}"
-            savings = f"$ {float(go['savings']):.2f}"
+        # for go in sale_games_json:
+        #     _sale_price_float = float(go['salePrice'])
+        #     sale_price = 'free' if _sale_price_float == 0.0 else f"$ {go['salePrice']}"
+        #     base_price = f"$ {go['normalPrice']}"
+        #     savings = f"$ {float(go['savings']):.2f}"
 
-            description = f"You save {savings}, by paying {sale_price}   instead of {strike_through(base_price)}"
+        #     description = f"You save {savings}, by paying {sale_price}   instead of {strike_through(base_price)}"
 
-            # will remove this code block in future, it's here for testing
-            _game = Game(title=go['title'], description=description,
-                         tags=None, genre=None, platform=None,
-                         price=sale_price, img=go['thumb'],
-                         link=f"https://www.cheapshark.com/redirect?dealID={go['dealID']}")
-            sale_games.append(_game.toMap())
+        #     # will remove this code block in future, it's here for testing
+        #     _game = Game(title=go['title'], description=description,
+        #                  tags=None, genre=None, platform=None,
+        #                  price=sale_price, img=go['thumb'],
+        #                  link=f"https://www.cheapshark.com/redirect?dealID={go['dealID']}")
+        #     sale_games.append(_game.toMap())
             
         res['free_games'] = free_games
         res['sale_games'] = sale_games

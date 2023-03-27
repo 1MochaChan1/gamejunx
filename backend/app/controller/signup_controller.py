@@ -24,7 +24,7 @@ def signup():
             db.session.add(_user)
             db.session.commit()
 
-            # Based on user create a wishlist    
+            # Based on user, create a wishlist    
             _wishlist = Wishlist(game_ids=None, user_id=_user.id);
             db.session.add(_wishlist)
             db.session.commit()
