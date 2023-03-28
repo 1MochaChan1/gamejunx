@@ -1,6 +1,6 @@
 from app import flask_app, request, db, make_response
 from app.colored_print import Colors, DebugPrint
-from app.helpers import went_wrong
+from app.helpers import went_wrong, create_wishlist
 from app.models import User, Wishlist
 
 
@@ -24,10 +24,11 @@ def signup():
             db.session.add(_user)
             db.session.commit()
 
-            # Based on user create a wishlist    
-            _wishlist = Wishlist(game_ids=None, user_id=_user.id);
-            db.session.add(_wishlist)
-            db.session.commit()
+            # Based on user, create a wishlist    
+            create_wishlist(_user)
+            # _wishlist = Wishlist(user_id=_user.id);
+            # db.session.add(_wishlist)
+            # db.session.commit()
             return _response
 
         if (matching_username):

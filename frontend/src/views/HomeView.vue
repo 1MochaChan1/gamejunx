@@ -36,9 +36,9 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 import GameTile from "../components/GameTile.vue";
-// import { APIEndpoints } from "../global";
+import { APIEndpoints } from "../global";
 import GameCarouselSlider from '../components/GameCarouselSlider.vue';
 
 export default {
@@ -59,219 +59,27 @@ export default {
 
   data: () => {
     return {
-      free_games: [
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-      ],
-      sale_games: [
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-        {
-          description:
-            "A hero-focused first-person team shooter from Blizzard Entertainment.",
-          genre: "Shooter",
-          id: null,
-          img: "https://www.freetogame.com/g/540/thumbnail.jpg",
-          link: "https://www.freetogame.com/overwatch-2",
-          platform: "pc",
-          price: "free",
-          tags: null,
-          title: "Overwatch 2",
-        },
-      ],
+      free_games: [],
+      sale_games: [],
     };
   },
 
   methods: {
     async getData() {
-      // await axios
-      //   .get(this.baseUrl + APIEndpoints.get_games)
-      //   .then((res) => {
-      //     console.log(res);
-      //     this.free_games = res.data.free_games;
-      //     this.sale_games = res.data.sale_games;
-      //   })
-      //   .catch(() => {});
-      // if (res.status == 200) {
-      //   console.log(res.data);
-      //   this.free_games = res.data.free_games;
-      // }
+      let result  = null
+      await axios
+        .get(this.baseUrl + APIEndpoints.get_games)
+        .then((res) => {
+          console.log(res);
+          result = res
+          this.free_games = res.data.free_games;
+          this.sale_games = res.data.sale_games;
+        })
+        .catch(() => {});
+      if (result.status == 200) {
+        console.log(result.data);
+        this.free_games = result.data.free_games;
+      }
     },
   },
   created() {
