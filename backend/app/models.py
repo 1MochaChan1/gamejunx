@@ -1,6 +1,10 @@
+import hashlib
 from app import db
-from app.helpers import encode_password
 
+# using this here instead of importing helpers.py, to avoid circular imports.
+def encode_password(text:str)->str:
+    encrypted_string:str= hashlib.md5(text.encode('utf')).hexdigest()
+    return encrypted_string
 
 # Will be used for email verification
 class UnverifiedUser(db.Model):
@@ -84,8 +88,8 @@ class Game(db.Model):
     genre = db.Column(db.String(100), nullable=True)
     platform = db.Column(db.String(50), nullable=True)
     price = db.Column(db.String(20), nullable=False)
-    img = db.Column(db.String(200), nullable=True)
-    link = db.Column(db.String(200), nullable=True)
+    img = db.Column(db.String(200), nullable=False)
+    link = db.Column(db.String(200), nullable=False)
 
     def toMap(self) -> dict:
         _map: dict = {
@@ -103,9 +107,15 @@ class Game(db.Model):
         return _map
 
     # factory method
-    def fromJson(self, json):
-        _game = Game(title=json['title'], description=json['description'], tags=json['tags'],
-                     genre=json['genre'], platform='_', price=json['price'], img=json['img'], link=json['link'])
+    def fromJson(json: dict):
+        _game = Game(title=json['title'],
+                     description=json['description'] if 'description' in json else None,
+                     tags=json['tags'] if 'tags' in json else None,
+                     genre=json['genre'] if 'genre' in json else None,
+                     platform='_',
+                     price=json['price'],
+                     img=json['img'],
+                     link=json['link'])
 
         # converting platform list from API to string.
         if (isinstance(json['platform'], list)):
@@ -136,8 +146,9 @@ class Game(db.Model):
 |                                                                  |
 |The wishlist is created at the time of creating a user account.   |
 |                                                                  |
-|Storing the game_ids as a String with a delimitter ','            |
-|When converting to a map, turning the game_ids String into a list.|
+|Storing the game_names as a String with a delimitter ','          |
+|When converting to a map, changing  the game_names String         | 
+|into a list.                                                      |
 |When fetching, it's being fetched as a String                     |
 |------------------------------------------------------------------|
 """
@@ -146,31 +157,28 @@ class Game(db.Model):
 class Wishlist(db.Model):
     __tablename__ = "wishlists"
     id = db.Column(db.Integer, primary_key=True)
-    game_ids = db.Column(db.String(10000), nullable=True)
+    game_names = db.Column(db.String(10000), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     def toMap(self) -> dict:
         _map: dict = {
             'id': self.id,
-            'game_ids': self.game_ids.split(',')
+            'game_names': self.game_names.split(','),
+            'user_id':self.user_id
         }
         return _map
 
-    def fromJson(self, json):
+    def fromJson(json: dict):
         _wishlist = Wishlist(
-            user_id=json['user_id']
-        )
-
-        # converting platform list from API to string.
-        if (isinstance(json['platform'], list)):
-            _wishlist.game_ids = ','.join(json['platform'])
-        else:
-            _wishlist.game_ids = ''
+            id=json['id'],
+            user_id=json['user_id'],
+            game_names=json['game_names']
+        )        
         return _wishlist
 
     def __repr__(self) -> str:
-        return f'Wishlist(id:{self.id}, user_id:{self.user_id}, game_ids:{self.game_ids})'
+        return f'Wishlist(id:{self.id}, user_id:{self.user_id}, game_names:{self.game_names})'
 
-    def __init__(self, game_ids: str, user_id: int):
-        self.game_ids = game_ids
+    def __init__(self, user_id: int, game_names: str=''):
+        self.game_names = game_names
         self.user_id = user_id

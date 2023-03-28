@@ -1,7 +1,7 @@
 from app import flask_app, db, jsonify, request
 import urllib3
 from app.helpers import went_wrong, token_required, strike_through, get_platform
-from app.models import User, Wishlist, Game
+from app.models import  Game
 from app.colored_print import DebugPrint, Colors
 from app.controller import secret
 import json
@@ -16,7 +16,7 @@ free_games_http.headers = secret.free_games_http_headers
 sale_games_http.headers = secret.sale_games_http_headers
 
 
-@flask_app.route('/backup-games', methods=['GET'])
+@flask_app.route('/backup-games', methods=['POST'])
 def backup_games():
     free_games: list[Game] = []
     sale_games: list[Game] = []
@@ -26,7 +26,9 @@ def backup_games():
     try:
         if (not (request.headers['Backup-Key'] == secret.backup_key)):
             return "Incorrect backup key in header."
-    # Calling free games API
+        # flushing the db
+        db.session.query(Game).delete()
+        # Calling free games API
         free_games_res = free_games_http.request(
             'GET', free_games_base_url + "/games")
         free_games_decoded = free_games_res.data.decode('utf-8')
@@ -87,9 +89,12 @@ def backup_games():
         # res['sale_games'] = sale_games
 
         db.session.commit()
-        return f"{len(free_games)} Free Games and {len(sale_games)} Games on Sale backed up"
+        res ['message'] = f"{len(free_games)} Free Games and {len(sale_games)} Games on Sale backed up"
+        return res
 
     except KeyError as ke:
-        return 'Backup key not found!'
+        res['status']='error'
+        res['message']='Backup key not found!'
+        return res
     except Exception as e:
         return went_wrong(e)

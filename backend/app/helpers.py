@@ -1,7 +1,8 @@
 import hashlib
 import traceback
 from app.colored_print import Colors, DebugPrint
-from app import request, wraps, jsonify, flask_app
+from app import request, wraps, jsonify, flask_app, db
+from app.models import Wishlist, User
 import jwt
 
 
@@ -43,3 +44,9 @@ def went_wrong(e:Exception):
     DebugPrint(e, color=Colors.red, end='\n------------------------\n')
     DebugPrint(''.join(traceback.TracebackException.from_exception(e).format()), color=Colors.error)
     return jsonify({"message":"Something went wrong", "status":"error"}),500
+
+def create_wishlist(user:User) -> Wishlist:
+    _wishlist: Wishlist = Wishlist(user_id=user.id)
+    db.session.add(_wishlist)
+    db.session.commit()
+    return _wishlist
