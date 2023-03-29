@@ -1,11 +1,16 @@
 <template>
   <div
     class="tile-container"
-    style="cssProps"
     @click="openUrl(this.link)"
     @mouseenter="this.hover = true"
     @mouseleave="this.hover = false"
   >
+    <div
+      class="wishlist-icon-container"
+      @click.stop="this.$emit('wishlistIconClicked')"
+    >
+      <GameWishlistIcon :isWishlisted="this.isWishlisted" />
+    </div>
     <div class="image-container">
       <div :class="{ 'image-holder-hover': hover, 'image-holder': !hover }">
         <img :src="this.img" alt="" />
@@ -37,7 +42,14 @@
 </template>
 
 <script>
+import GameWishlistIcon from "./GameWishlistIcon.vue";
 export default {
+  name: "GameTile",
+
+  components: {
+    GameWishlistIcon,
+  },
+
   data() {
     return {
       hover: false,
@@ -49,13 +61,6 @@ export default {
     showSection() {
       return this.hover;
     },
-    cssProps() {
-      return {
-        "--background-img": `url(${this.imgFromData})`,
-        "--some-col": "#FFFFFF",
-        "--is-hovering": this.hover,
-      };
-    },
   },
 
   methods: {
@@ -65,35 +70,26 @@ export default {
     openUrl(urlStr) {
       window.open(urlStr);
     },
+
     makePlatformList() {
       switch (this.platform) {
         case "pc":
           return "windows-line.svg";
-        // arr.push("windows-line.svg");
-        // break;
 
         case "xbox":
           return "xbox-line.svg";
-        // arr.push("xbox-line.svg");
-        // break;
 
         case "ps":
           return "playstation-line.svg";
-        // arr.push("playstation-line.svg");
-        // break;
 
         case "switch":
           return "switch-line.svg";
-        // arr.push("switch-line.svg");
-        // break;
 
         case "browser":
           return "globe-line.svg";
 
         default:
           return "";
-        // arr.push("windows-line.svg");
-        // break;
       }
     },
   },
@@ -130,6 +126,10 @@ export default {
       type: String,
       default: "https://www.freetogame.com/open/revelation-online",
     },
+    isWishlisted: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -140,6 +140,7 @@ p {
 }
 
 .tile-container {
+  position: relative;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -150,6 +151,13 @@ p {
   background-color: var(--neutral-tile-color);
   box-shadow: var(--shadow-tile);
   transition: var(--tile-transition-time);
+}
+
+.wishlist-icon-container {
+  position: absolute;
+  right: 6px;
+  top: 4px;
+  z-index: 1;
 }
 
 .title-container {

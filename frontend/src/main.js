@@ -19,5 +19,6 @@ app.use(router)
 app.component('fa-icon', FontAwesomeIcon)
 
 axios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem('token');
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 app.config.globalProperties.baseUrl = 'http://127.0.0.1:5000/';
 app.mount('#app')

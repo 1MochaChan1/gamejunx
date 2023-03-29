@@ -7,6 +7,7 @@ export class APIEndpoints {
   static get_games = "get-games";
   static basic_user_details = "user-details/basic"
   static change_user_password = "user-details/password"
+  static wishlist = "wishlist"
 }
 
 export function delay(ms) {

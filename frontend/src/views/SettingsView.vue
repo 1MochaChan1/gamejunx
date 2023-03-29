@@ -195,7 +195,6 @@ export default {
         new_password: "",
         confirmed_password: "",
       },
-      id: localStorage.getItem("id"),
 
       async_errors: {
         is_username_unique: true,
