@@ -3,7 +3,7 @@
     <div class="local-toast-container">
       <Transition name="toast">
         <div v-if="this.showToast">
-          <AppToast :content="this.message" :success="this.isSuccess" :screenWidth="'1300px'"  />
+          <AppToast :content="this.message" :success="this.isSuccess" :screenWidth="'1300px'"/>
         </div>
       </Transition>
     </div>
