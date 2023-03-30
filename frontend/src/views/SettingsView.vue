@@ -1,107 +1,116 @@
 <template>
-  <div class="page-parent-container">
-    <div class="account-settings-container">
-      <h2>Account Settings</h2>
-      <div class="fields-container">
-        <div>
-          <AppTextFieldEdit
-            v-model="this.name"
-            label="Display Name"
-            class="field-width"
+  <div>
+    <div class="local-toast-container">
+      <Transition name="toast">
+        <div v-if="this.showToast">
+          <AppToast :content="this.message" :success="this.isSuccess" :screenWidth="'1300px'"  />
+        </div>
+      </Transition>
+    </div>
+    <div class="page-parent-container">
+      <div class="account-settings-container">
+        <h2>Account Settings</h2>
+        <div class="fields-container">
+          <div>
+            <AppTextFieldEdit
+              v-model="this.name"
+              label="Display Name"
+              class="field-width"
+            />
+            <span class="error-message" v-if="v$.name.$error">
+              {{ this.v$.name.$errors[0].$message }}
+            </span>
+          </div>
+          <div class="field-row">
+            <div>
+              <AppTextFieldEdit
+                v-model="this.username"
+                label="Username"
+                class="field-width"
+              />
+
+              <span class="error-message" v-if="v$.username.$error">
+                {{ this.v$.username.$errors[0].$message }}
+              </span>
+            </div>
+            <div>
+              <AppTextFieldEdit
+                v-model="this.email"
+                label="Email"
+                class="field-width"
+              />
+              <span class="error-message" v-if="v$.email.$error">
+                {{ this.v$.email.$errors[0].$message }}
+              </span>
+            </div>
+          </div>
+          <AppButton
+            label="Save Changes"
+            style="width: max-content"
+            @click="this.saveNameChanged"
           />
-          <span class="error-message" v-if="v$.name.$error">
-            {{ this.v$.name.$errors[0].$message }}
-          </span>
-        </div>
-        <div class="field-row">
-          <div>
-            <AppTextFieldEdit
-              v-model="this.username"
-              label="Username"
-              class="field-width"
-            />
+          <br />
+          <h6>Change Password</h6>
+          <div class="field-row">
+            <div>
+              <AppTextFieldPassword
+                v-model="this.passwords.oldPassword"
+                label="Old Password"
+                hint="•••••••••"
+                class="field-width"
+              />
+              <span
+                class="error-message"
+                v-if="v$.passwords.oldPassword.$error"
+                >{{ this.v$.passwords.oldPassword.$errors[0].$message }}</span
+              >
+            </div>
+            <p class="link1">Forgot Password?</p>
+          </div>
 
-            <span class="error-message" v-if="v$.username.$error">
-              {{ this.v$.username.$errors[0].$message }}
-            </span>
+          <div class="field-row">
+            <div>
+              <AppTextFieldPassword
+                v-model="this.passwords.newPassword"
+                label="New Password"
+                hint="•••••••••"
+                class="field-width"
+              />
+              <span
+                class="error-message"
+                v-if="v$.passwords.newPassword.$error"
+                >{{ this.v$.passwords.newPassword.$errors[0].$message }}</span
+              >
+            </div>
+            <div>
+              <AppTextFieldPassword
+                v-model="this.passwords.confirmedPassword"
+                label="Confirm Password"
+                hint="•••••••••"
+                class="field-width"
+              />
+              <span
+                class="error-message"
+                v-if="v$.passwords.confirmedPassword.$error"
+                >{{
+                  this.v$.passwords.confirmedPassword.$errors[0].$message
+                }}</span
+              >
+            </div>
           </div>
-          <div>
-            <AppTextFieldEdit
-              v-model="this.email"
-              label="Email"
-              class="field-width"
-            />
-            <span class="error-message" v-if="v$.email.$error">
-              {{ this.v$.email.$errors[0].$message }}
-            </span>
-          </div>
+          <AppButton
+            label="Save Changes"
+            style="width: max-content"
+            @click="this.savePasswordChanged"
+          />
+          <br />
+          <AppButton
+            label="Terminate Account"
+            style="width: max-content"
+            :background_color="'var(--semantics-error-color)'"
+            :foreground_color="'var(--neutral-text-color)'"
+          />
         </div>
-        <AppButton
-          label="Save Changes"
-          style="width: max-content"
-          @click="this.saveNameChanged"
-        />
-        <br />
-        <h6>Change Password</h6>
-        <div class="field-row">
-          <div>
-            <AppTextFieldPassword
-              v-model="this.passwords.old_password"
-              label="Old Password"
-              hint="•••••••••"
-              class="field-width"
-            />
-            <span
-              class="error-message"
-              v-if="v$.passwords.old_password.$error"
-              >{{ this.v$.passwords.old_password.$errors[0].$message }}</span
-            >
-          </div>
-          <p class="link1">Forgot Password?</p>
-        </div>
-
-        <div class="field-row">
-          <div>
-            <AppTextFieldPassword
-              v-model="this.passwords.new_password"
-              label="New Password"
-              hint="•••••••••"
-              class="field-width"
-            />
-            <span
-              class="error-message"
-              v-if="v$.passwords.new_password.$error"
-              >{{ this.v$.passwords.new_password.$errors[0].$message }}</span
-            >
-          </div>
-          <div>
-            <AppTextFieldPassword
-              v-model="this.passwords.confirmed_password"
-              label="Confirm Password"
-              hint="•••••••••"
-              class="field-width"
-            />
-            <span
-              class="error-message"
-              v-if="v$.passwords.confirmed_password.$error"
-              >{{
-                this.v$.passwords.confirmed_password.$errors[0].$message
-              }}</span
-            >
-          </div>
-        </div>
-        <AppButton
-          label="Save Changes"
-          style="width: max-content"
-          @click="this.savePasswordChanged"
-        />
-        <br />
-        <AppButton
-          label="Terminate Account"
-          style="width: max-content"
-          :background_color="'var(--semantics-error-color)'"
-          :foreground_color="'var(--neutral-text-color)'"
-        />
       </div>
     </div>
   </div>
@@ -115,8 +124,10 @@ import AppTextFieldEdit from "../components/AppTextFieldEdit.vue";
 import { APIEndpoints, titalize } from "../global";
 import axios from "axios";
 import AppTextFieldPassword from "../components/AppTextFieldPassword.vue";
+import AppToast from "../components/AppToast.vue";
+
 export default {
-  components: { AppTextFieldEdit, AppButton, AppTextFieldPassword },
+  components: { AppTextFieldEdit, AppButton, AppTextFieldPassword, AppToast },
   name: "SettingsView",
 
   setup() {
@@ -129,16 +140,16 @@ export default {
 
   computed: {
     getUsernameErrorStatus() {
-      return this.async_errors.is_username_unique;
+      return this.asyncErrors.isUsernameUnique;
     },
     getEmailErrorStatus() {
-      return this.async_errors.is_email_unique;
+      return this.asyncErrors.isEmailUnique;
     },
     getPasswordErrorStatus() {
-      return this.async_errors.is_password_valid;
+      return this.asyncErrors.isPasswordValid;
     },
     getPasswordMatchStatus() {
-      return this.passwords.new_password === this.passwords.confirmed_password;
+      return this.passwords.newPassword === this.passwords.confirmedPassword;
     },
   },
 
@@ -163,18 +174,18 @@ export default {
         ),
       },
       passwords: {
-        old_password: {
+        oldPassword: {
           required: helpers.withMessage("Old password is required.", required),
           valid: helpers.withMessage(
             "Given password doesn't match",
             () => this.getPasswordErrorStatus
           ),
         },
-        new_password: {
+        newPassword: {
           required: helpers.withMessage("New password is required.", required),
           minLength: minLength(8),
         },
-        confirmed_password: {
+        confirmedPassword: {
           required,
           match: helpers.withMessage(
             "The password does not match",
@@ -191,16 +202,19 @@ export default {
       username: localStorage.getItem("username"),
       email: localStorage.getItem("email"),
       passwords: {
-        old_password: "",
-        new_password: "",
-        confirmed_password: "",
+        oldPassword: "",
+        newPassword: "",
+        confirmedPassword: "",
       },
 
-      async_errors: {
-        is_username_unique: true,
-        is_email_unique: true,
-        is_password_valid: true,
+      asyncErrors: {
+        isUsernameUnique: true,
+        isEmailUnique: true,
+        isPasswordValid: true,
       },
+      message: "",
+      showToast: false,
+      isSuccess: false,
     };
   },
 
@@ -210,7 +224,7 @@ export default {
       this.v$.username.$touch();
       this.v$.email.$touch();
 
-      // if response.status === error =---- then -> async_errors.is_username_unique = response.error
+      // if response.status === error =---- then -> asyncErrors.isUsernameUnique = response.error
       // else _username.error = ''
       let data = null;
       await axios
@@ -222,17 +236,19 @@ export default {
         })
         .then((res) => {
           data = res.data;
+          this.showToastMessage(data.message, data.status);
         })
         .catch((res) => {
           data = res.response.data;
+          this.showToastMessage(data.message, data.status);
         });
 
-      this.async_errors.is_username_unique = !data.message
+      this.asyncErrors.isUsernameUnique = !data.message
         .toLowerCase()
         .includes("username");
       await this.v$.username.$touch();
 
-      this.async_errors.is_email_unique = !data.message
+      this.asyncErrors.isEmailUnique = !data.message
         .toLowerCase()
         .includes("email");
       await this.v$.email.$touch();
@@ -243,26 +259,30 @@ export default {
     },
 
     async savePasswordChanged() {
-      this.v$.passwords.old_password.$touch();
-      this.v$.passwords.new_password.$touch();
-      this.v$.passwords.confirmed_password.$touch();
+      this.v$.passwords.oldPassword.$touch();
+      this.v$.passwords.newPassword.$touch();
+      this.v$.passwords.confirmedPassword.$touch();
 
       let data = null;
       await axios
         .put(this.baseUrl + APIEndpoints.change_user_password, {
           id: localStorage.id,
-          old_password: this.passwords.old_password,
-          new_password: this.passwords.new_password,
+          oldPassword: this.passwords.oldPassword,
+          newPassword: this.passwords.newPassword,
         })
         .then((res) => {
           data = res.data;
+          this.showToastMessage(data.message, data.status);
         })
-        .catch((res) => (data = res.response.data));
+        .catch((res) => {
+          data = res.response.data;
+          this.showToastMessage(data.message, data.status);
+        });
 
-      this.async_errors.is_password_valid = !data.message
+      this.asyncErrors.isPasswordValid = !data.message
         .toLowerCase()
         .includes("old password");
-      await this.v$.passwords.old_password.$touch();
+      await this.v$.passwords.oldPassword.$touch();
     },
 
     populateStorage(data) {
@@ -271,11 +291,23 @@ export default {
       localStorage.setItem("username", data.user.username);
       localStorage.setItem("email", data.user.email);
     },
+
+    showToastMessage(msg, status) {
+      this.message = msg;
+      this.isSuccess = status != "error";
+
+      this.showToast = true;
+      setTimeout(() => (this.showToast = false), 3000);
+    },
   },
 };
 </script>
 
 <style scoped>
+/* .local-toast-container{
+  width: 80%;
+} */
+
 h2 {
   margin: 0px;
 }
@@ -286,8 +318,6 @@ h6 {
 .link1 {
   margin-top: 36px;
 }
-
-
 
 .account-settings-container {
   display: flex;

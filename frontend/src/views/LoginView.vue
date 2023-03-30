@@ -126,7 +126,7 @@ export default {
             );
           });
 
-        await delay(2000);
+        await delay(1500);
         if (response != null) {
           switch (response.status) {
             case 200: {
