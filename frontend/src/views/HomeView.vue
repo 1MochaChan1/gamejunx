@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <GameCarouselSlider/>
+    <GameCarouselSlider />
     <h3>Free</h3>
     <div class="horizontal-games-container">
       <div v-for="game in get_free_games" :key="game.index">
@@ -12,11 +12,14 @@
           :price="game.price.toUpperCase()"
           :img="game.img"
           :link="game.link"
+          :isWishlisted="game.wishlisted"
+          @wishlist-icon-clicked="this.addOrRemoveFromWishlist(game)"
+          
         />
       </div>
     </div>
 
-    <div class="heightbox-container" style="height:16px"></div>
+    <div class="heightbox-container" style="height: 16px"></div>
     <h3>On Sale</h3>
     <div class="horizontal-games-container">
       <div v-for="game in get_sale_games" :key="game.index">
@@ -28,6 +31,8 @@
           :price="game.price.toUpperCase()"
           :img="game.img"
           :link="game.link"
+          :isWishlisted="game.wishlisted"
+          @wishlist-icon-clicked="this.addOrRemoveFromWishlist(game)"
         />
       </div>
     </div>
@@ -39,7 +44,7 @@
 import axios from "axios";
 import GameTile from "../components/GameTile.vue";
 import { APIEndpoints } from "../global";
-import GameCarouselSlider from '../components/GameCarouselSlider.vue';
+import GameCarouselSlider from "../components/GameCarouselSlider.vue";
 
 export default {
   name: "HomeView",
@@ -66,21 +71,29 @@ export default {
 
   methods: {
     async getData() {
-      let result  = null
+      let result = null;
       await axios
-        .get(this.baseUrl + APIEndpoints.get_games)
+        .get(this.baseUrl + APIEndpoints.get_games, {params:{user_id:localStorage.id}})
         .then((res) => {
-          console.log(res);
-          result = res
+          result = res;
           this.free_games = res.data.free_games;
           this.sale_games = res.data.sale_games;
         })
-        .catch(() => {});
+        .catch((res) => {
+          result = res;
+        });
       if (result.status == 200) {
-        console.log(result.data);
         this.free_games = result.data.free_games;
       }
     },
+    
+    addOrRemoveFromWishlist(gameToAddOrRemove){
+      axios.put(this.baseUrl + APIEndpoints.wishlist, {
+        user_id:localStorage.id,
+        game: gameToAddOrRemove
+      }).then(()=>{}).catch(()=>{})
+    }
+
   },
   created() {
     this.getData();
