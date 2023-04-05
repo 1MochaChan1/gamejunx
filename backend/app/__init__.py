@@ -7,18 +7,18 @@ from functools import wraps
 
 from app.controller import secret
 
-flask_app = Flask(__name__)
-flask_app.debug = True
-flask_app.config.from_object(__name__)
-flask_app.config['SECRET_KEY'] = secret.jwt_token_key
-flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/gamejunx_test'
+application = Flask(__name__)
+application.debug = True
+application.config.from_object(__name__)
+application.config['SECRET_KEY'] = secret.jwt_token_key
+application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/gamejunx_test'
 # flask_app.config['SQLALCHEMY_DATABASE_URI'] = secret.aws_database_uri
-flask_app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
+application.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
 
-db = SQLAlchemy(flask_app)
+db = SQLAlchemy(application)
 
 
-CORS(flask_app, resources={r"/*": {'origins': "*"}})
+CORS(application, resources={r"/*": {'origins': "*"}})
 
 import app.controller.router
 import app.controller.signup_controller

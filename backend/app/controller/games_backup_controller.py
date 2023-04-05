@@ -1,4 +1,4 @@
-from app import flask_app, db, jsonify, request
+from app import application, db, jsonify, request
 import urllib3
 from app.helpers import went_wrong, token_required, strike_through, get_platform
 from app.models import  Game
@@ -16,7 +16,7 @@ free_games_http.headers = secret.free_games_http_headers
 sale_games_http.headers = secret.sale_games_http_headers
 
 
-@flask_app.route('/backup-games', methods=['POST'])
+@application.route('/backup-games', methods=['POST'])
 def backup_games():
     free_games: list[Game] = []
     sale_games: list[Game] = []

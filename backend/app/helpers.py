@@ -1,7 +1,7 @@
 import hashlib
 import traceback
 from app.colored_print import Colors, DebugPrint
-from app import request, wraps, jsonify, flask_app, db
+from app import request, wraps, jsonify, application, db
 from app.models import Wishlist, User
 import jwt
 
@@ -33,7 +33,7 @@ def token_required(func):
         if (not token):
             return jsonify({'error':'Token is missing!'}),401
         try:
-            jwt.decode(token, flask_app.config['SECRET_KEY'],algorithms=['HS256'])
+            jwt.decode(token, application.config['SECRET_KEY'],algorithms=['HS256'])
             return(func(*args, **kwargs))
         except Exception as e:
             went_wrong(e)

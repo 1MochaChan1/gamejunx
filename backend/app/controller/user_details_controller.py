@@ -1,11 +1,11 @@
-from app import flask_app, db, request
+from app import application, db, request
 from app.helpers import token_required, went_wrong, encode_password
 from app.models import User
 from app.colored_print import DebugPrint
 import sqlalchemy
 
 
-@flask_app.route('/user-details/basic', methods=['PUT', 'GET'])
+@application.route('/user-details/basic', methods=['PUT', 'GET'])
 @token_required
 def change_name_details():
     res = {'status': 'success', 'message': 'User Successfully Updated!'}
@@ -53,7 +53,7 @@ def change_name_details():
         return went_wrong(e)
 
 
-@flask_app.route('/user-details/password', methods=['PUT'])
+@application.route('/user-details/password', methods=['PUT'])
 @token_required
 def change_password():
     res = {'status': 'success', 'message': 'Password Successfully Updated!'}

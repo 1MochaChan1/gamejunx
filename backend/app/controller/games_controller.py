@@ -1,4 +1,4 @@
-from app import flask_app,  jsonify, request, db
+from app import application,  jsonify, request, db
 import urllib3
 from app.helpers import went_wrong, token_required, create_wishlist
 from app.models import User, Wishlist, Game
@@ -16,7 +16,7 @@ free_games_http.headers = secret.free_games_http_headers
 sale_games_http.headers = secret.sale_games_http_headers
 
 
-@flask_app.route('/wishlist', methods=['GET', 'PUT'])
+@application.route('/wishlist', methods=['GET', 'PUT'])
 @token_required
 def add_remove_wishlist():
     res = {'status': 'success', 'message': 'none'}
@@ -92,7 +92,7 @@ def add_remove_wishlist():
         return went_wrong(e)
 
 
-@flask_app.route('/get-games', methods=['GET'])
+@application.route('/get-games', methods=['GET'])
 @token_required
 def get_games():
     free_games: list[Game] = []
