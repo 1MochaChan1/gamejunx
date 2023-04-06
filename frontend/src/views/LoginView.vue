@@ -69,7 +69,7 @@ import AppButton from "../components/AppButton.vue";
 import { required, helpers } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import AppToast from "../components/AppToast.vue";
-import { delay } from "../global";
+import { APIEndpoints, delay } from "../global";
 export default {
   setup: () => ({
     v$: useVuelidate(),
@@ -111,7 +111,7 @@ export default {
       if (isValid) {
         let response = null;
         await axios
-          .post(this.baseUrl + "/login", {
+          .post(this.baseUrl + APIEndpoints.login, {
             username: this.username,
             password: this.password,
           })
